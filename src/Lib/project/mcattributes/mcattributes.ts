@@ -4,6 +4,9 @@ import * as fs from "fs";
  *
  */
 export interface MCAttributes {
+  /**
+   *
+   */
   [property: string]: string;
 }
 
@@ -41,7 +44,11 @@ export namespace MCAttributes {
     return Out;
   }
 
-  /** */
+  /**
+   *
+   * @param data
+   * @returns
+   */
   export function ToString(data: MCAttributes): string {
     let Out = "";
 
@@ -59,8 +66,6 @@ export namespace MCAttributes {
    * @param filepath
    */
   export function LoadSync(filepath: string): MCAttributes {
-    let s = fs.statSync(filepath);
-
     if (fs.existsSync(filepath)) {
       let buffer = fs.readFileSync(filepath);
 
@@ -98,7 +103,7 @@ export namespace MCAttributes {
    * @param filepath
    * @returns
    */
-  export function Save(data: MCAttributes, filepath: string): Promise<void> {
+  export async function Save(data: MCAttributes, filepath: string): Promise<void> {
     const content = ToString(data);
 
     return fs.promises.writeFile(filepath, content);
