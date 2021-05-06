@@ -77,6 +77,19 @@ export namespace MCAttributes {
 
   /**
    *
+   * @param receiver
+   * @param source
+   */
+  export function Merge(receiver: MCAttributes, source: MCAttributes): void {
+    for (const Key in source) {
+      const value = source[Key];
+
+      receiver[Key] = value;
+    }
+  }
+
+  /**
+   *
    * @param filepath
    * @returns
    */
