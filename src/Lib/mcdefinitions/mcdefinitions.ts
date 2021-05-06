@@ -90,6 +90,11 @@ export interface MCDefinition {
 export namespace MCDefinition {
   /**
    *
+   */
+  export const Filename = ".mcdefinitions";
+
+  /**
+   *
    * @param content
    */
   export function Parse(content: string): MCDefinition {

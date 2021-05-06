@@ -16,6 +16,11 @@ export interface MCAttributes {
 export namespace MCAttributes {
   /**
    *
+   */
+  export const Filename = ".mcattributes";
+
+  /**
+   *
    * @param content
    */
   export function Parse(content: string): MCAttributes {

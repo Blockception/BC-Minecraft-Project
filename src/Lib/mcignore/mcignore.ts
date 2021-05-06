@@ -17,11 +17,16 @@ export interface MCIgnore {
 export namespace MCIgnore {
   /**
    *
+   */
+  export const Filename = ".mcignore";
+
+  /**
+   *
    * @param startFolder
    * @param ignore
    */
   export function GetFiles(source: string | string[], ignore: MCIgnore): string[] {
-    let Results = fg.sync(source, { ignore: ignore.patterns });
+    let Results = fg.sync(source, { ignore: ignore.patterns, absolute: true, onlyFiles: true });
 
     return Results;
   }
