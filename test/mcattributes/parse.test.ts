@@ -13,7 +13,7 @@ const Attribute1 = [
 
 suite("mcattribute", () => {
   test("parse1", () => {
-    let parse = MCAttributes.Parse(Text1);
+    let parse = MCAttributes.parse(Text1);
 
     for (var I = 0; I < Attribute1.length; I++) {
       const element = Attribute1[I];
