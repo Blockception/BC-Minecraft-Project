@@ -96,7 +96,7 @@ export namespace MCDefinition {
    * @param content The contents of the given files
    */
   export function parse(content: string): MCDefinition {
-    let parts = content.split("\n");
+    let parts = content.split(/(\r\n|\n)/);
     let Out = MCDefinition.createEmpty();
 
     parts.forEach((property) => {

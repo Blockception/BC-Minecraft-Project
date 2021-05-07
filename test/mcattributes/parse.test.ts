@@ -1,5 +1,7 @@
-import { assert } from "console";
 import { MCAttributes } from "../../src/main";
+import { TestFilesFolder } from "../utillity.test";
+import * as path from "path";
+import assert = require("assert");
 
 const Text1 = `diagnostics.objectives=true
 diagnostics.tags=false
@@ -20,7 +22,35 @@ suite("mcattribute", () => {
 
       const value = parse[element.key];
 
-      assert(value === element.value, `expected: ${element.value} got ${value}`);
+      assert.strictEqual(value, element.value);
     }
+  });
+
+  test("loadSync file1", () => {
+    const filepath = path.join(TestFilesFolder, "mcattributes", "file1.mcattributes");
+
+    let Attributes = MCAttributes.loadSync(filepath);
+
+    assert.strictEqual(Attributes["diagnose"], "true");
+    assert.strictEqual(Attributes["diagnose.objectives"], "true");
+    assert.strictEqual(Attributes["diagnose.tags"], "false");
+    assert.strictEqual(Attributes["diagnose.mcfunctions"], "true");
+
+    assert.strictEqual(Attributes["world.area_used"], "0 0 0 1000 256 1000");
+  });
+
+  test("load file2", (done) => {
+    const filepath = path.join(TestFilesFolder, "mcattributes", "file2.mcattributes");
+
+    MCAttributes.load(filepath).then((Attributes) => {
+      assert.strictEqual(Attributes["diagnose"], "true");
+      assert.strictEqual(Attributes["diagnose.objectives"], "true");
+      assert.strictEqual(Attributes["diagnose.tags"], "false");
+      assert.strictEqual(Attributes["diagnose.mcfunctions"], "true");
+
+      assert.strictEqual(Attributes["world.area_used"], "0 0 0 1000 256 1000");
+
+      done();
+    });
   });
 });

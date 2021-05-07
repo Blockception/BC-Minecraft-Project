@@ -14,7 +14,7 @@
       "request": "launch",
       "name": "Mocha all tests",
       "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
-      "args": ["${workspaceRoot}/test/**/*.spec.ts"],
+      "args": ["${workspaceRoot}/lib/test/**/*.test.js"],
       "cwd": "${workspaceRoot}",
       "internalConsoleOptions": "openOnSessionStart"
     }

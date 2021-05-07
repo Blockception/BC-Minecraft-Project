@@ -23,7 +23,7 @@ export namespace MCAttributes {
    * @returns A parsed version based on the contents, or an empty object
    */
   export function parse(content: string): MCAttributes {
-    let parts = content.split("\n");
+    let parts = content.split(/(\r\n|\n)/);
 
     let Out: MCAttributes = {};
 
