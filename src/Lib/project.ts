@@ -47,9 +47,9 @@ export namespace MCProject {
    * @returns
    */
   export function loadSync(Source: string): MCProject {
-    let Attributes = MCAttributes.LoadSync(path.join(Source, MCAttributes.Filename));
-    let Definitions = MCDefinition.LoadSync(path.join(Source, MCDefinition.Filename));
-    let Ignores = MCIgnore.LoadSync(path.join(Source, MCIgnore.Filename));
+    let Attributes = MCAttributes.loadSync(path.join(Source, MCAttributes.filename));
+    let Definitions = MCDefinition.loadSync(path.join(Source, MCDefinition.filename));
+    let Ignores = MCIgnore.loadSync(path.join(Source, MCIgnore.filename));
 
     return {
       attributes: Attributes,
@@ -63,7 +63,7 @@ export namespace MCProject {
    */
   export function load(Source: string): Promise<MCProject> {
     return new Promise((reject, resolve) => {
-      return LoadSync(Source);
+      return loadSync(Source);
     });
   }
 
