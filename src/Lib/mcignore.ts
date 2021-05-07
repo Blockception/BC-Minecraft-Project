@@ -1,19 +1,13 @@
 import * as fg from "fast-glob";
 import * as fs from "fs";
 
-/**
- *
- */
+/**The interface that collects ignore patterns*/
 export interface MCIgnore {
-  /**
-   *
-   */
+  /**The glob patterns that are used to ignore*/
   patterns: string[];
 }
 
-/**
- *
- */
+/**The namespace that provides functions for MCIgnore interfaces*/
 export namespace MCIgnore {
   /**The default filename of a MCIgnore filename*/
   export const filename = ".mcignore";
