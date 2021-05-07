@@ -10,6 +10,13 @@
       "problemMatcher": ["$tsc"]
     },
     {
+      "type": "npm",
+      "script": "test",
+      "isBackground": false,
+      "group": "build",
+      "problemMatcher": ["$tsc"]
+    },
+    {
       "type": "shell",
       "label": "Format workspace",
       "command": "Powershell.exe -executionpolicy remotesigned -File ./scripts/format_documents.ps1",

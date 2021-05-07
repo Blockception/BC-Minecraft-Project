@@ -67,4 +67,16 @@ export namespace project {
 
     return Promise.all(P);
   }
+
+  /**
+   *
+   * @returns
+   */
+  export function CreateEmpty(): MCProject {
+    return {
+      attributes: MCAttributes.CreateEmpty(),
+      definitions: MCDefinition.CreateEmpty(),
+      ignores: MCIgnore.CreateEmpty(),
+    };
+  }
 }
