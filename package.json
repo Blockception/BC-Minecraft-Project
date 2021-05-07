@@ -1,7 +1,7 @@
 {
-  "name": "bc-minecraft-data",
+  "name": "bc-minecraft-project",
   "version": "1.0.10",
-  "description": "A library used for completion, diagnostics and objects for minecraft bedrock",
+  "description": "A library that provides object and handling for minecraft projects",
   "main": "./lib/src/main.js",
   "types": "./lib/src/main.d.ts",
   "scripts": {
