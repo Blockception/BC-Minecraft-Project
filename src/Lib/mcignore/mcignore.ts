@@ -22,11 +22,43 @@ export namespace MCIgnore {
 
   /**
    *
+   * @returns
+   */
+  export function CreateEmpty(): MCIgnore {
+    return { patterns: [] };
+  }
+
+  /**
+   *
+   * @param A
+   * @param B
+   * @returns
+   */
+  export function Merge(A: MCIgnore | undefined, B: MCIgnore): MCIgnore {
+    if (A) {
+      let Out = MCIgnore.CreateEmpty();
+
+      Out.patterns.push(...A.patterns);
+      Out.patterns.push(...B.patterns);
+      return Out;
+    }
+
+    return B;
+  }
+
+  /**
+   *
    * @param startFolder
    * @param ignore
    */
-  export function GetFiles(source: string | string[], ignore: MCIgnore): string[] {
-    let Results = fg.sync(source, { ignore: ignore.patterns, absolute: true, onlyFiles: true });
+  export function GetFiles(source: string | string[], ignore: MCIgnore, options: fg.Options | undefined = undefined): string[] {
+    if (!options) {
+      options = { absolute: true, onlyFiles: true };
+    }
+
+    options.ignore = ignore.patterns;
+
+    let Results = fg.sync(source, options);
 
     return Results;
   }
@@ -37,8 +69,14 @@ export namespace MCIgnore {
    * @param ignore
    * @returns
    */
-  export async function GetFilesAsync(source: string | string[], ignore: MCIgnore): Promise<string[]> {
-    return fg(source, { ignore: ignore.patterns });
+  export async function GetFilesAsync(source: string | string[], ignore: MCIgnore, options: fg.Options | undefined = undefined): Promise<string[]> {
+    if (!options) {
+      options = { absolute: true, onlyFiles: true };
+    }
+
+    options.ignore = ignore.patterns;
+
+    return fg(source, options);
   }
 
   /**

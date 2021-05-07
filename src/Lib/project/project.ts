@@ -1,9 +1,7 @@
-import FastGlob = require("fast-glob");
 import { MCAttributes } from "../mcattributes/mcattributes";
 import { MCDefinition } from "../mcdefinitions/mcdefinitions";
 import { MCIgnore } from "../mcignore/mcignore";
 import * as path from "path";
-import { promises } from "dns";
 
 /**
  *
@@ -14,13 +12,34 @@ export interface MCProject {
   definitions: MCDefinition;
 }
 
+/**
+ *
+ */
 export namespace project {
   /**
    *
    * @param Source
    */
-  export function Load(Source: string): MCProject {
-    var Results = FastGlob.sync(Source, { absolute: true, onlyFiles: true });
+  export function LoadSync(Source: string): MCProject {
+    let Attributes = MCAttributes.LoadSync(path.join(Source, MCAttributes.Filename));
+    let Definitions = MCDefinition.LoadSync(path.join(Source, MCDefinition.Filename));
+    let Ignores = MCIgnore.LoadSync(path.join(Source, MCIgnore.Filename));
+
+    return {
+      attributes: Attributes,
+      definitions: Definitions,
+      ignores: Ignores,
+    };
+  }
+
+  /**
+   *
+   * @param Source
+   */
+  export function Load(Source: string): Promise<MCProject> {
+    return new Promise((reject, resolve) => {
+      return LoadSync(Source);
+    });
   }
 
   /**

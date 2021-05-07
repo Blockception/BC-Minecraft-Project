@@ -19,6 +19,10 @@ export namespace MCAttributes {
    */
   export const Filename = ".mcattributes";
 
+  export function CreateEmpty(): MCAttributes {
+    return {};
+  }
+
   /**
    *
    * @param content
