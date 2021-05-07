@@ -1,26 +1,52 @@
-import { MCAttributes } from "../mcattributes/mcattributes";
-import { MCDefinition } from "../mcdefinitions/mcdefinitions";
-import { MCIgnore } from "../mcignore/mcignore";
 import * as path from "path";
+import { MCAttributes } from "./mcattributes";
+import { MCDefinition } from "./mcdefinitions";
+import { MCIgnore } from "./mcignore";
 
-/**
- *
- */
+/**An interface that stored minecraft project data */
 export interface MCProject {
+  /**The collection of project attributes*/
   attributes: MCAttributes;
+  /**The collection of project ignores patterns*/
   ignores: MCIgnore;
+  /**The collection of definitions to the project*/
   definitions: MCDefinition;
 }
 
-/**
- *
- */
-export namespace project {
-  /**
-   *
-   * @param Source
+/**The namespace that provides functionality to MCProjects*/
+export namespace MCProject {
+  /**Creates an empty version of the MCProject
+   * @returns
    */
-  export function LoadSync(Source: string): MCProject {
+  export function createEmpty(): MCProject {
+    return {
+      attributes: MCAttributes.createEmpty(),
+      definitions: MCDefinition.createEmpty(),
+      ignores: MCIgnore.createEmpty(),
+    };
+  }
+
+  /**Checks wheter or not the given object implements MCProject
+   * @param value The object to inspect
+   * @returns Wheter or not the given object implements MCProject
+   */
+  export function is(value: any): value is MCProject {
+    if (value) {
+      if (!(value.definitions && MCDefinition.is(value.definitions))) return false;
+      if (!(value.ignores && MCIgnore.is(value.ignores))) return false;
+      if (!(value.attributes && typeof value.attributes === "object")) return false;
+
+      return true;
+    }
+
+    return false;
+  }
+
+  /**Loads from the given root folder the nesscary project files
+   * @param Source The root folder to retrieve files from
+   * @returns
+   */
+  export function loadSync(Source: string): MCProject {
     let Attributes = MCAttributes.LoadSync(path.join(Source, MCAttributes.Filename));
     let Definitions = MCDefinition.LoadSync(path.join(Source, MCDefinition.Filename));
     let Ignores = MCIgnore.LoadSync(path.join(Source, MCIgnore.Filename));
@@ -32,51 +58,37 @@ export namespace project {
     };
   }
 
-  /**
-   *
-   * @param Source
+  /**Loads from the given root folder the nesscary project files
+   * @param Source The root folder to retrieve files from
    */
-  export function Load(Source: string): Promise<MCProject> {
+  export function load(Source: string): Promise<MCProject> {
     return new Promise((reject, resolve) => {
       return LoadSync(Source);
     });
   }
 
-  /**
-   *
-   * @param Folder
-   * @param project
+  /**Saves the gives project into the specified folder
+   * @param FolderThe folder to the save the data into
+   * @param project The data to save
    */
-  export function SaveSync(Folder: string, project: MCProject): void {
-    MCAttributes.SaveSync(project.attributes, path.join(Folder, MCAttributes.Filename));
-    MCIgnore.SaveSync(project.ignores, path.join(Folder, MCIgnore.Filename));
-    MCDefinition.SaveSync(project.definitions, path.join(Folder, MCDefinition.Filename));
+  export function saveSync(Folder: string, project: MCProject): void {
+    MCAttributes.saveSync(project.attributes, path.join(Folder, MCAttributes.filename));
+    MCIgnore.saveSync(project.ignores, path.join(Folder, MCIgnore.filename));
+    MCDefinition.saveSync(project.definitions, path.join(Folder, MCDefinition.filename));
   }
 
-  /**
-   *
-   * @param Folder
-   * @param project
+  /**Saves the gives project into the specified folder
+   * @param FolderThe folder to the save the data into
+   * @param project The data to save
+   * @returns A promise that is done wheter the data has been written
    */
-  export async function Save(Folder: string, project: MCProject): Promise<void[]> {
+  export async function save(Folder: string, project: MCProject): Promise<void[]> {
     let P: Promise<void>[] = [
-      MCAttributes.Save(project.attributes, path.join(Folder, MCAttributes.Filename)),
-      MCIgnore.Save(project.ignores, path.join(Folder, MCIgnore.Filename)),
-      MCDefinition.Save(project.definitions, path.join(Folder, MCDefinition.Filename)),
+      MCAttributes.save(project.attributes, path.join(Folder, MCAttributes.filename)),
+      MCIgnore.save(project.ignores, path.join(Folder, MCIgnore.filename)),
+      MCDefinition.save(project.definitions, path.join(Folder, MCDefinition.filename)),
     ];
 
     return Promise.all(P);
-  }
-
-  /**
-   *
-   * @returns
-   */
-  export function CreateEmpty(): MCProject {
-    return {
-      attributes: MCAttributes.CreateEmpty(),
-      definitions: MCDefinition.CreateEmpty(),
-      ignores: MCIgnore.CreateEmpty(),
-    };
   }
 }

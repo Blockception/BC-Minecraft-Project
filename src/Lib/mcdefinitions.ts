@@ -1,30 +1,21 @@
 import * as fs from "fs";
 
-/**
- *
- */
+/**A single defintion for MCDefinitions*/
 export interface Definition {
-  /**
-   *
-   */
+  /**The definition that have been defined*/
   Defined: string[];
 
-  /**
-   *
-   */
+  /**The definition that have to be excluded*/
   Excluded: string[];
 }
 
-/**
- *
- */
+/**The namespace that provides functions for Definitions*/
 export namespace Definition {
-  /**
-   *
-   * @param container
-   * @param value
+  /**Add the given value to the definition container, checks if value start with '!' to determine if its exclude or not
+   * @param container The container to add to
+   * @param value The value to add, if its start with '!' its added to the exclude list
    */
-  export function Add(container: Definition, value: string): void {
+  export function add(container: Definition, value: string): void {
     if (value.startsWith("!")) {
       container.Excluded.push(value.substring(1, value.length));
     } else {
@@ -32,13 +23,12 @@ export namespace Definition {
     }
   }
 
-  /**
-   *
-   * @param container
-   * @param key
-   * @returns
+  /**Converts the given container into a text rep for files
+   * @param container The container to convert
+   * @param key The key each item will be receiving
+   * @returns A text rep of the object for files
    */
-  export function ToString(container: Definition, key: string): string {
+  export function toString(container: Definition, key: string): string {
     let Out = "";
 
     Out += `## ${key}\n`;
@@ -55,51 +45,59 @@ export namespace Definition {
     return Out;
   }
 
-  /**
-   *
-   * @returns
+  /**Creates an empty version of the interface Definition
+   * @returns A empty version of Definition
    */
-  export function CreateEmpty(): Definition {
+  export function createEmpty(): Definition {
     return {
       Excluded: [],
       Defined: [],
     };
   }
+
+  /** Checks if the given object implements the Defintion interface
+   * @param value The object to inspect
+   * @returns Wheter or not the object implements Definition
+   */
+  export function is(value: any): value is Definition {
+    if (value) {
+      if (value.Defined && Array.isArray(value.Defined)) {
+        if (value.Excluded && Array.isArray(value.Excluded)) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
 }
 
-/**
- *
- */
+/**The interface for MCDefinitions*/
 export interface MCDefinition {
-  /** */
+  /**The collection of tags*/
   Tags: Definition;
 
-  /** */
+  /**The collection of scoreboard objectives*/
   Objectives: Definition;
 
-  /** */
+  /**The collection of entity families*/
   Families: Definition;
 
-  /** */
+  /**The collection of names*/
   Names: Definition;
 }
 
-/**
- *
- */
+/**The namespace that provides functions for the MCDefinition interface*/
 export namespace MCDefinition {
-  /**
-   *
-   */
-  export const Filename = ".mcdefinitions";
+  /**The default filename of MCDefintions*/
+  export const filename = ".mcdefinitions";
 
-  /**
-   *
-   * @param content
+  /**Converts the given contents as if its file contents and returns a MCDefinition object
+   * @param content The contents of the given files
    */
-  export function Parse(content: string): MCDefinition {
+  export function parse(content: string): MCDefinition {
     let parts = content.split("\n");
-    let Out = MCDefinition.CreateEmpty();
+    let Out = MCDefinition.createEmpty();
 
     parts.forEach((property) => {
       //Remove comment
@@ -117,16 +115,16 @@ export namespace MCDefinition {
 
         switch (name) {
           case "tag":
-            Definition.Add(Out.Tags, value);
+            Definition.add(Out.Tags, value);
 
           case "objective":
-            Definition.Add(Out.Objectives, value);
+            Definition.add(Out.Objectives, value);
 
           case "family":
-            Definition.Add(Out.Families, value);
+            Definition.add(Out.Families, value);
 
           case "name":
-            Definition.Add(Out.Names, value);
+            Definition.add(Out.Names, value);
 
           default:
         }
@@ -136,95 +134,116 @@ export namespace MCDefinition {
     return Out;
   }
 
-  /**
-   *
-   * @param data
-   * @returns
+  /**Converts the given MCDefinition object into a file content rep of the object
+   * @param data The MCDefinition to convert
+   * @returns A text rep of the object
    */
-  export function ToString(data: MCDefinition): string {
+  export function toString(data: MCDefinition): string {
     let Out = "";
 
-    Out += Definition.ToString(data.Tags, "tag");
-    Out += Definition.ToString(data.Objectives, "objective");
-    Out += Definition.ToString(data.Names, "name");
-    Out += Definition.ToString(data.Families, "family");
+    Out += Definition.toString(data.Tags, "tag");
+    Out += Definition.toString(data.Objectives, "objective");
+    Out += Definition.toString(data.Names, "name");
+    Out += Definition.toString(data.Families, "family");
 
     return Out;
   }
 
-  /**
-   *
-   * @param filepath
+  /**Checks if the given object implements MCDefinition
+   * @param value The object to determine
+   * @returns Wheter or not the object implements MCDefinition
    */
-  export function LoadSync(filepath: string): MCDefinition {
-    if (fs.existsSync(filepath)) {
-      let buffer = fs.readFileSync(filepath);
+  export function is(value: any): value is MCDefinition {
+    if (value) {
+      if (!Definition.is(value.Tags)) return false;
+      if (!Definition.is(value.Objectives)) return false;
+      if (!Definition.is(value.Families)) return false;
+      if (!Definition.is(value.Names)) return false;
 
-      return Parse(buffer.toString());
+      return true;
     }
 
-    return CreateEmpty();
+    return false;
   }
 
-  /**
-   *
-   * @param filepath
-   * @returns
+  /**Creates an empty version of MCDefinition
+   * @returns An empty definition of MCDefinition
    */
-  export async function Load(filepath: string): Promise<MCDefinition> {
-    let P = fs.promises.readFile(filepath);
-
-    return P.then((buffer) => Parse(buffer.toString()));
-  }
-
-  /**
-   *
-   * @param data
-   * @param filepath
-   */
-  export function SaveSync(data: MCDefinition, filepath: string): void {
-    const content = ToString(data);
-
-    fs.writeFileSync(filepath, content);
-  }
-
-  /**
-   *
-   * @param data
-   * @param filepath
-   * @returns
-   */
-  export async function Save(data: MCDefinition, filepath: string): Promise<void> {
-    const content = ToString(data);
-
-    return fs.promises.writeFile(filepath, content);
-  }
-
-  /**
-   *
-   * @returns
-   */
-  export function CreateEmpty(): MCDefinition {
+  export function createEmpty(): MCDefinition {
     return {
-      Families: Definition.CreateEmpty(),
-      Names: Definition.CreateEmpty(),
-      Objectives: Definition.CreateEmpty(),
-      Tags: Definition.CreateEmpty(),
+      Families: Definition.createEmpty(),
+      Names: Definition.createEmpty(),
+      Objectives: Definition.createEmpty(),
+      Tags: Definition.createEmpty(),
     };
   }
 
-  /**
-   *
-   * @param filepath
-   * @param key
-   * @param value
-   * @param exclude
+  /**Appends the given property and value into the give file
+   * @param filepath The path to the MCAttributes
+   * @param key The key of the value
+   * @param value The value of the porerty
+   * @param exclude Whetever or not the exclude the value
    */
-  export function Append(filepath: string, key: string, value: string, exclude: boolean = false): void {
+  export function appendSync(filepath: string, key: string, value: string, exclude: boolean = false): void {
     if (exclude) {
       value = "!" + value;
     }
 
     fs.appendFileSync(filepath, `${key}=${value}\n`);
+  }
+
+  /**Appends the given property and value into the give file
+   * @param filepath The path to the MCAttributes
+   * @param property The property key
+   * @param value The value of the porerty
+   * @returns A promise for when the file is appended
+   */
+  export async function append(filepath: string, property: string, value: string): Promise<void> {
+    return fs.promises.appendFile(filepath, `${property}=${value}\n`);
+  }
+
+  /** Loads the content of the given file into a MCDefinition
+   * @param filepath The path to the file to load
+   * @returns A filled MCDefinition
+   */
+  export function loadSync(filepath: string): MCDefinition {
+    if (fs.existsSync(filepath)) {
+      let buffer = fs.readFileSync(filepath);
+
+      return parse(buffer.toString());
+    }
+
+    return createEmpty();
+  }
+
+  /** Loads the content of the given file into a MCDefinition
+   * @param filepath The path to the file to load
+   * @returns A filled promise that returns a MCDefinition
+   */
+  export async function load(filepath: string): Promise<MCDefinition> {
+    let P = fs.promises.readFile(filepath);
+
+    return P.then((buffer) => parse(buffer.toString()));
+  }
+
+  /** Saves the given MCDefinition into the specified file
+   * @param data The data to save
+   * @param filepath The filepath to save to
+   */
+  export function saveSync(data: MCDefinition, filepath: string): void {
+    const content = toString(data);
+
+    fs.writeFileSync(filepath, content);
+  }
+
+  /** Saves the given MCDefinition into the specified file
+   * @param data The data to save
+   * @param filepath The filepath to save to
+   * @returns A promise for when the file will be saved
+   */
+  export async function save(data: MCDefinition, filepath: string): Promise<void> {
+    const content = toString(data);
+
+    return fs.promises.writeFile(filepath, content);
   }
 }

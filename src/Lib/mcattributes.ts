@@ -1,33 +1,28 @@
 import * as fs from "fs";
 
-/**
- *
- */
+/**An obect that stores project settings, attributes or other project related definition*/
 export interface MCAttributes {
-  /**
-   *
-   */
+  /**A property definition*/
   [property: string]: string;
 }
 
-/**
- *
- */
+/**The namespace that provides code for MCAttributes interfaces*/
 export namespace MCAttributes {
-  /**
-   *
-   */
-  export const Filename = ".mcattributes";
+  /**The default filename of a MCAttributes filename*/
+  export const filename = ".mcattributes";
 
-  export function CreateEmpty(): MCAttributes {
+  /**Creates an empty version of MCAttributes
+   * @returns An empty MCAttributes object
+   */
+  export function createEmpty(): MCAttributes {
     return {};
   }
 
-  /**
-   *
-   * @param content
+  /**Parses the given content as if its file content, whereby each line is an attribute
+   * @param content The content that one would get as in a file
+   * @returns A parsed version based on the contents, or an empty object
    */
-  export function Parse(content: string): MCAttributes {
+  export function parse(content: string): MCAttributes {
     let parts = content.split("\n");
 
     let Out: MCAttributes = {};
@@ -36,7 +31,7 @@ export namespace MCAttributes {
       let cindex = property.indexOf("#");
 
       if (cindex >= 0) {
-        property = property.substring(0, cindex);
+        property = property.substring(0, cindex).trim();
       }
 
       let index = property.indexOf("=");
@@ -53,81 +48,106 @@ export namespace MCAttributes {
     return Out;
   }
 
-  /**
-   *
-   * @param data
-   * @returns
+  /**Converts the given MCAttributes to file content
+   * @param data The MCAttributes data to convert
+   * @returns A string represerntation of the contents of a MCAttributes
    */
-  export function ToString(data: MCAttributes): string {
+  export function toString(data: MCAttributes): string {
     let Out = "";
 
     for (const Key in data) {
       const value = data[Key];
 
-      Out += `${Key}=${value}`;
+      if (value && typeof value === "string") Out += `${Key}=${value}`;
     }
 
     return Out;
   }
 
-  /**
-   *
-   * @param filepath
+  /** Merges the two given objects into a new mcattributes. Whereby B overrides anything A has specified
+   * @param A The first data set
+   * @param B The second data set, overrides anything A has specified
+   * @returns A new object with the combined attributes
    */
-  export function LoadSync(filepath: string): MCAttributes {
+  export function merge(A: MCAttributes, B: MCAttributes): MCAttributes {
+    let Out = createEmpty();
+
+    for (const Key in A) {
+      const value = A[Key];
+
+      Out[Key] = value;
+    }
+
+    for (const Key in B) {
+      const value = B[Key];
+
+      Out[Key] = value;
+    }
+
+    return Out;
+  }
+
+  /** Loads the content of the given file into a MCAttributes
+   * @param filepath The path to the file to load
+   * @returns A filled MCAttributes
+   */
+  export function loadSync(filepath: string): MCAttributes {
     if (fs.existsSync(filepath)) {
       let buffer = fs.readFileSync(filepath);
 
-      return Parse(buffer.toString());
+      return parse(buffer.toString());
     }
 
     return {};
   }
 
-  /**
-   *
-   * @param receiver
-   * @param source
+  /** Loads the content of the given file into a MCAttributes
+   * @param filepath The path to the file to load
+   * @returns A filled promise that returns a MCAttributes
    */
-  export function Merge(receiver: MCAttributes, source: MCAttributes): void {
-    for (const Key in source) {
-      const value = source[Key];
-
-      receiver[Key] = value;
-    }
-  }
-
-  /**
-   *
-   * @param filepath
-   * @returns
-   */
-  export async function Load(filepath: string): Promise<MCAttributes> {
+  export async function load(filepath: string): Promise<MCAttributes> {
     let P = fs.promises.readFile(filepath);
 
-    return P.then((buffer) => Parse(buffer.toString()));
+    return P.then((buffer) => parse(buffer.toString()));
   }
 
-  /**
-   *
-   * @param data
-   * @param filepath
+  /** Saves the given MCAttributes into the specified file
+   * @param data The data to save
+   * @param filepath The filepath to save to
    */
-  export function SaveSync(data: MCAttributes, filepath: string): void {
-    const content = ToString(data);
+  export function saveSync(data: MCAttributes, filepath: string): void {
+    const content = toString(data);
 
     fs.writeFileSync(filepath, content);
   }
 
-  /**
-   *
-   * @param data
-   * @param filepath
-   * @returns
+  /** Saves the given MCAttributes into the specified file
+   * @param data The data to save
+   * @param filepath The filepath to save to
+   * @returns A promise for when the file will be saved
    */
-  export async function Save(data: MCAttributes, filepath: string): Promise<void> {
-    const content = ToString(data);
+  export async function save(data: MCAttributes, filepath: string): Promise<void> {
+    const content = toString(data);
 
     return fs.promises.writeFile(filepath, content);
+  }
+
+  /**Appends the given property and value into the give file
+   * @param filepath The path to the MCAttributes
+   * @param property The property key
+   * @param value The value of the porerty
+   */
+  export function appendSync(filepath: string, property: string, value: string): void {
+    fs.appendFileSync(filepath, `${property}=${value}\n`);
+  }
+
+  /**Appends the given property and value into the give file
+   * @param filepath The path to the MCAttributes
+   * @param property The property key
+   * @param value The value of the porerty
+   * @returns A promise for when the file is appended
+   */
+  export async function append(filepath: string, property: string, value: string): Promise<void> {
+    return fs.promises.appendFile(filepath, `${property}=${value}\n`);
   }
 }
