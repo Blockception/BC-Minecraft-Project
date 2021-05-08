@@ -19,17 +19,17 @@ suite("MCProject", () => {
     assert.strictEqual(keys.length, 5, "expected 5 attributes");
 
     //Definitions
-    assert.strictEqual(project.definitions.tag.Defined.length, 1);
-    assert.strictEqual(project.definitions.tag.Excluded.length, 1);
+    assert.strictEqual(project.definitions.tag.defined.length, 1);
+    assert.strictEqual(project.definitions.tag.excluded.length, 1);
 
-    assert.strictEqual(project.definitions.family.Defined.length, 3);
-    assert.strictEqual(project.definitions.family.Excluded.length, 1);
+    assert.strictEqual(project.definitions.family.defined.length, 3);
+    assert.strictEqual(project.definitions.family.excluded.length, 1);
 
-    assert.strictEqual(project.definitions.objective.Defined.length, 1);
-    assert.strictEqual(project.definitions.objective.Excluded.length, 1);
+    assert.strictEqual(project.definitions.objective.defined.length, 1);
+    assert.strictEqual(project.definitions.objective.excluded.length, 1);
 
-    assert.strictEqual(project.definitions.name.Defined.length, 1);
-    assert.strictEqual(project.definitions.name.Excluded.length, 1);
+    assert.strictEqual(project.definitions.name.defined.length, 1);
+    assert.strictEqual(project.definitions.name.excluded.length, 1);
 
     //Ignores
     assert.strictEqual(project.ignores.patterns.length, 4);
@@ -44,17 +44,17 @@ suite("MCProject", () => {
       assert.strictEqual(keys.length, 5, "expected 5 attributes");
 
       //Definitions
-      assert.strictEqual(project.definitions.tag.Defined.length, 1);
-      assert.strictEqual(project.definitions.tag.Excluded.length, 1);
+      assert.strictEqual(project.definitions.tag.defined.length, 1);
+      assert.strictEqual(project.definitions.tag.excluded.length, 1);
 
-      assert.strictEqual(project.definitions.family.Defined.length, 3);
-      assert.strictEqual(project.definitions.family.Excluded.length, 1);
+      assert.strictEqual(project.definitions.family.defined.length, 3);
+      assert.strictEqual(project.definitions.family.excluded.length, 1);
 
-      assert.strictEqual(project.definitions.objective.Defined.length, 1);
-      assert.strictEqual(project.definitions.objective.Excluded.length, 1);
+      assert.strictEqual(project.definitions.objective.defined.length, 1);
+      assert.strictEqual(project.definitions.objective.excluded.length, 1);
 
-      assert.strictEqual(project.definitions.name.Defined.length, 1);
-      assert.strictEqual(project.definitions.name.Excluded.length, 1);
+      assert.strictEqual(project.definitions.name.defined.length, 1);
+      assert.strictEqual(project.definitions.name.excluded.length, 1);
 
       //Ignores
       assert.strictEqual(project.ignores.patterns.length, 4);

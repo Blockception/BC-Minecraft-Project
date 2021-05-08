@@ -3,10 +3,10 @@ import * as fs from "fs";
 /**A single defintion for MCDefinitions*/
 export interface Definition {
   /**The definition that have been defined*/
-  Defined: string[];
+  defined: string[];
 
   /**The definition that have to be excluded*/
-  Excluded: string[];
+  excluded: string[];
 }
 
 /**The namespace that provides functions for Definitions*/
@@ -17,9 +17,9 @@ export namespace Definition {
    */
   export function add(container: Definition, value: string): void {
     if (value.startsWith("!")) {
-      container.Excluded.push(value.substring(1, value.length));
+      container.excluded.push(value.substring(1, value.length));
     } else {
-      container.Defined.push(value);
+      container.defined.push(value);
     }
   }
 
@@ -32,12 +32,12 @@ export namespace Definition {
     let Out = "";
 
     Out += `## ${key}\n`;
-    for (let I = 0; I < container.Defined.length; I++) {
-      Out += `${key}=${container.Defined[I]}\n`;
+    for (let I = 0; I < container.defined.length; I++) {
+      Out += `${key}=${container.defined[I]}\n`;
     }
 
-    for (let I = 0; I < container.Excluded.length; I++) {
-      Out += `${key}=!${container.Excluded[I]}\n`;
+    for (let I = 0; I < container.excluded.length; I++) {
+      Out += `${key}=!${container.excluded[I]}\n`;
     }
 
     Out += "\n";
@@ -50,8 +50,8 @@ export namespace Definition {
    */
   export function createEmpty(): Definition {
     return {
-      Excluded: [],
-      Defined: [],
+      excluded: [],
+      defined: [],
     };
   }
 
