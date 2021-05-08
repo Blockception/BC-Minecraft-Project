@@ -61,8 +61,8 @@ export namespace Definition {
    */
   export function is(value: any): value is Definition {
     if (value) {
-      if (value.Defined && Array.isArray(value.Defined)) {
-        if (value.Excluded && Array.isArray(value.Excluded)) {
+      if (value.defined && Array.isArray(value.defined)) {
+        if (value.excluded && Array.isArray(value.excluded)) {
           return true;
         }
       }
