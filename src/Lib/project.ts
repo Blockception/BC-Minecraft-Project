@@ -43,25 +43,6 @@ export namespace MCProject {
     return false;
   }
 
-  /**Uses fast-glob to collect files in given source(s)
-   * @param project The project to retrieve files from
-   * @param source The source(s) where to start lookinto, or glob patterns
-   * @param options Possible options that needs to be applied, the .ignore will receive patterns from the MCIGnore
-   * @returns A collection of found files
-   */
-  export function getFiles(project: MCProject, source: string | string[], options: fg.Options | undefined = undefined): string[] {
-    return MCIgnore.getFiles(source, project.ignores, options);
-  }
-
-  /**Uses fast-glob to collect files in given source(s)
-   * @param project The project to retrieve files from
-   * @param options Possible options that needs to be applied, the .ignore will receive patterns from the MCIGnore
-   * @returns A promise that will return collected files
-   */
-  export async function getFilesAsync(project: MCProject, source: string | string[], options: fg.Options | undefined = undefined): Promise<string[]> {
-    return MCIgnore.getFilesAsync(source, project.ignores, options);
-  }
-
   /**Loads from the given root folder the nesscary project files
    * @param Source The root folder to retrieve files from
    * @returns

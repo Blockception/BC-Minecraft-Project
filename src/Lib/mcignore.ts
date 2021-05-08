@@ -44,48 +44,6 @@ export namespace MCIgnore {
     return false;
   }
 
-  /**Uses fast-glob to collect files in given source(s)
-   * @param source The source(s) where to start lookinto, or glob patterns
-   * @param ignore The patterns that will be used to filter out files
-   * @param options Possible options that needs to be applied, the .ignore will receive patterns from the MCIGnore
-   * @returns A collection of found files
-   */
-  export function getFiles(source: string | string[], ignore: MCIgnore, options: fg.Options | undefined = undefined): string[] {
-    if (!options) {
-      options = { absolute: true, onlyFiles: true, ignore: [] };
-    }
-
-    if (!options.ignore) {
-      options.ignore = [];
-    }
-
-    options.ignore.push(...ignore.patterns);
-
-    let Results = fg.sync(source, options);
-
-    return Results;
-  }
-
-  /**Uses fast-glob to collect files in given source(s)
-   * @param source The source(s) where to start lookinto, or glob patterns
-   * @param ignore The patterns that will be used to filter out files
-   * @param options Possible options that needs to be applied, the .ignore will receive patterns from the MCIGnore
-   * @returns A promise that will return collected files
-   */
-  export async function getFilesAsync(source: string | string[], ignore: MCIgnore, options: fg.Options | undefined = undefined): Promise<string[]> {
-    if (!options) {
-      options = { absolute: true, onlyFiles: true, ignore: [] };
-    }
-
-    if (!options.ignore) {
-      options.ignore = [];
-    }
-
-    options.ignore.push(...ignore.patterns);
-
-    return fg(source, options);
-  }
-
   /**Parses the given content as if its file content, whereby each line is an pattern
    * @param content The content that one would get as in a file
    * @returns A parsed version based on the contents, or an empty object
