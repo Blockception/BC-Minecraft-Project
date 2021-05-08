@@ -1,4 +1,3 @@
-import * as fg from "fast-glob";
 import * as fs from "fs";
 
 /**The interface that collects ignore patterns*/

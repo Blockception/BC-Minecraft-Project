@@ -31,6 +31,9 @@ suite("MCProject", () => {
     assert.strictEqual(project.definitions.name.defined.length, 1);
     assert.strictEqual(project.definitions.name.excluded.length, 1);
 
+    assert.strictEqual(project.attributes.diagnose, "true");
+    assert.strictEqual(project.attributes["world.area_used"], "true");
+
     //Ignores
     assert.strictEqual(project.ignores.patterns.length, 4);
   });
@@ -55,6 +58,9 @@ suite("MCProject", () => {
 
       assert.strictEqual(project.definitions.name.defined.length, 1);
       assert.strictEqual(project.definitions.name.excluded.length, 1);
+
+      assert.strictEqual(project.attributes.diagnose, "true");
+      assert.strictEqual(project.attributes["world.area_used"], "true");
 
       //Ignores
       assert.strictEqual(project.ignores.patterns.length, 4);

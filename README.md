@@ -2,6 +2,23 @@
 
 A Typescript library for dealing with minecraft bedrock project data
 
+## Examples
+
+```ts
+let project = MCProject.loadSync("some folder");
+
+let tags = project.definitions.tag;
+if (tags && tags.defined.includes('family')) {
+  ...
+}
+
+if (project.attributes.diagnose === "true") {
+  ...
+}
+
+
+```
+
 ## Project Attribute
 
 This standard will introduce 3 new file that will help with project definition, attributes, excluded/includes of folders/files and settings that deal with project for minecraft
@@ -9,6 +26,7 @@ bedrock.
 The file can be found in the root of the project. The following files will be added:
 
 - [Blockception Minecraft Project](#blockception-minecraft-project)
+  - [Examples](#examples)
   - [Project Attribute](#project-attribute)
     - [McAttributes](#mcattributes)
     - [McDefinitions](#mcdefinitions)

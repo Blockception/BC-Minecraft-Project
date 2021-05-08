@@ -1,4 +1,3 @@
-import * as fg from "fast-glob";
 import * as path from "path";
 import { MCAttributes } from "./mcattributes";
 import { MCDefinition } from "./mcdefinitions";
