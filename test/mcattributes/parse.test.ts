@@ -13,7 +13,7 @@ const Attribute1 = [
   { key: "diagnostics.json", value: "true" },
 ];
 
-suite("mcattribute", () => {
+suite("MCAttributes", () => {
   test("parse1", () => {
     let parse = MCAttributes.parse(Text1);
 
