@@ -87,6 +87,22 @@ export namespace MCAttributes {
     return Out;
   }
 
+  /**Retrieves the given key from the attributes safely, if non exist an entry is made with the given default value
+   * @param attributes The attributes to retrieve the value from
+   * @param key The key that stores the specified value
+   * @param defaultValue The default value to set
+   */
+  export function getOrAdd(attributes: MCAttributes, key: string, defaultValue: string = ""): string {
+    let value = attributes[key];
+
+    if (value === undefined || value === null) {
+      value = defaultValue;
+      attributes[key] = value;
+    }
+
+    return value;
+  }
+
   /** Loads the content of the given file into a MCAttributes
    * @param filepath The path to the file to load
    * @returns A filled MCAttributes
