@@ -35,12 +35,9 @@
   },
   "homepage": "https://github.com/Blockception/BC-Minecraft-Project#readme",
   "files": [
-    "lib/**/*",
-    "!lib/test"
+    "lib/src/**/*"
   ],
-  "dependencies": {
-    "fast-glob": "^3.2.5"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/chai": "^4.2.17",
     "@types/mocha": "^8.2.1",
