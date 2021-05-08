@@ -116,15 +116,19 @@ export namespace MCDefinition {
         switch (name) {
           case "tag":
             Definition.add(Out.Tags, value);
+            break;
 
           case "objective":
             Definition.add(Out.Objectives, value);
+            break;
 
           case "family":
             Definition.add(Out.Families, value);
+            break;
 
           case "name":
             Definition.add(Out.Names, value);
+            break;
 
           default:
         }

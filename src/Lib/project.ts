@@ -62,8 +62,8 @@ export namespace MCProject {
    * @param Source The root folder to retrieve files from
    */
   export function load(Source: string): Promise<MCProject> {
-    return new Promise((reject, resolve) => {
-      return loadSync(Source);
+    return new Promise((resolve, reject) => {
+      resolve(loadSync(Source));
     });
   }
 
