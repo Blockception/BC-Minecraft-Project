@@ -74,17 +74,7 @@ export namespace Definition {
 
 /**The interface for MCDefinitions*/
 export interface MCDefinition {
-  /**The collection of tags*/
-  Tags: Definition;
-
-  /**The collection of scoreboard objectives*/
-  Objectives: Definition;
-
-  /**The collection of entity families*/
-  Families: Definition;
-
-  /**The collection of names*/
-  Names: Definition;
+  [category: string]: Definition;
 }
 
 /**The namespace that provides functions for the MCDefinition interface*/
@@ -113,29 +103,28 @@ export namespace MCDefinition {
         const name = property.substring(0, index).toLowerCase();
         const value = property.substring(index + 1, property.length);
 
-        switch (name) {
-          case "tag":
-            Definition.add(Out.Tags, value);
-            break;
-
-          case "objective":
-            Definition.add(Out.Objectives, value);
-            break;
-
-          case "family":
-            Definition.add(Out.Families, value);
-            break;
-
-          case "name":
-            Definition.add(Out.Names, value);
-            break;
-
-          default:
-        }
+        let container = getOrAdd(Out, name);
+        Definition.add(container, value);
       }
     });
 
     return Out;
+  }
+
+  /**
+   *
+   * @param data
+   * @param category
+   */
+  export function getOrAdd(data: MCDefinition, category: string): Definition {
+    let item = data[category];
+
+    if (item === undefined || item === null) {
+      item = Definition.createEmpty();
+      data[category] = item;
+    }
+
+    return item;
   }
 
   /**Converts the given MCDefinition object into a file content rep of the object
@@ -153,33 +142,11 @@ export namespace MCDefinition {
     return Out;
   }
 
-  /**Checks if the given object implements MCDefinition
-   * @param value The object to determine
-   * @returns Wheter or not the object implements MCDefinition
-   */
-  export function is(value: any): value is MCDefinition {
-    if (value) {
-      if (!Definition.is(value.Tags)) return false;
-      if (!Definition.is(value.Objectives)) return false;
-      if (!Definition.is(value.Families)) return false;
-      if (!Definition.is(value.Names)) return false;
-
-      return true;
-    }
-
-    return false;
-  }
-
   /**Creates an empty version of MCDefinition
    * @returns An empty definition of MCDefinition
    */
   export function createEmpty(): MCDefinition {
-    return {
-      Families: Definition.createEmpty(),
-      Names: Definition.createEmpty(),
-      Objectives: Definition.createEmpty(),
-      Tags: Definition.createEmpty(),
-    };
+    return {};
   }
 
   /**Appends the given property and value into the give file

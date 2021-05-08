@@ -19,17 +19,17 @@ suite("MCProject", () => {
     assert.strictEqual(keys.length, 5, "expected 5 attributes");
 
     //Definitions
-    assert.strictEqual(project.definitions.Tags.Defined.length, 1);
-    assert.strictEqual(project.definitions.Tags.Excluded.length, 1);
+    assert.strictEqual(project.definitions.tag.Defined.length, 1);
+    assert.strictEqual(project.definitions.tag.Excluded.length, 1);
 
-    assert.strictEqual(project.definitions.Families.Defined.length, 3);
-    assert.strictEqual(project.definitions.Families.Excluded.length, 1);
+    assert.strictEqual(project.definitions.family.Defined.length, 3);
+    assert.strictEqual(project.definitions.family.Excluded.length, 1);
 
-    assert.strictEqual(project.definitions.Objectives.Defined.length, 1);
-    assert.strictEqual(project.definitions.Objectives.Excluded.length, 1);
+    assert.strictEqual(project.definitions.objective.Defined.length, 1);
+    assert.strictEqual(project.definitions.objective.Excluded.length, 1);
 
-    assert.strictEqual(project.definitions.Names.Defined.length, 1);
-    assert.strictEqual(project.definitions.Names.Excluded.length, 1);
+    assert.strictEqual(project.definitions.name.Defined.length, 1);
+    assert.strictEqual(project.definitions.name.Excluded.length, 1);
 
     //Ignores
     assert.strictEqual(project.ignores.patterns.length, 4);
@@ -44,20 +44,50 @@ suite("MCProject", () => {
       assert.strictEqual(keys.length, 5, "expected 5 attributes");
 
       //Definitions
-      assert.strictEqual(project.definitions.Tags.Defined.length, 1);
-      assert.strictEqual(project.definitions.Tags.Excluded.length, 1);
+      assert.strictEqual(project.definitions.tag.Defined.length, 1);
+      assert.strictEqual(project.definitions.tag.Excluded.length, 1);
 
-      assert.strictEqual(project.definitions.Families.Defined.length, 3);
-      assert.strictEqual(project.definitions.Families.Excluded.length, 1);
+      assert.strictEqual(project.definitions.family.Defined.length, 3);
+      assert.strictEqual(project.definitions.family.Excluded.length, 1);
 
-      assert.strictEqual(project.definitions.Objectives.Defined.length, 1);
-      assert.strictEqual(project.definitions.Objectives.Excluded.length, 1);
+      assert.strictEqual(project.definitions.objective.Defined.length, 1);
+      assert.strictEqual(project.definitions.objective.Excluded.length, 1);
 
-      assert.strictEqual(project.definitions.Names.Defined.length, 1);
-      assert.strictEqual(project.definitions.Names.Excluded.length, 1);
+      assert.strictEqual(project.definitions.name.Defined.length, 1);
+      assert.strictEqual(project.definitions.name.Excluded.length, 1);
 
       //Ignores
       assert.strictEqual(project.ignores.patterns.length, 4);
+
+      done();
+    });
+  });
+
+  test("loadSync not existing", () => {
+    const folder = path.join(TestFilesFolder, "mcproject", "non_existing");
+
+    let project = MCProject.loadSync(folder);
+
+    var keys = Object.getOwnPropertyNames(project.attributes);
+    assert.strictEqual(keys.length, 0);
+
+    var keys = Object.getOwnPropertyNames(project.definitions);
+    assert.strictEqual(keys.length, 0);
+
+    assert.strictEqual(project.ignores.patterns.length, 0);
+  });
+
+  test("load not existing", (done) => {
+    const folder = path.join(TestFilesFolder, "mcproject", "non_existing");
+
+    MCProject.load(folder).then((project) => {
+      var keys = Object.getOwnPropertyNames(project.attributes);
+      assert.strictEqual(keys.length, 0);
+
+      var keys = Object.getOwnPropertyNames(project.definitions);
+      assert.strictEqual(keys.length, 0);
+
+      assert.strictEqual(project.ignores.patterns.length, 0);
 
       done();
     });

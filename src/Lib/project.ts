@@ -33,9 +33,9 @@ export namespace MCProject {
    */
   export function is(value: any): value is MCProject {
     if (value) {
-      if (!(value.definitions && MCDefinition.is(value.definitions))) return false;
       if (!(value.ignores && MCIgnore.is(value.ignores))) return false;
       if (!(value.attributes && typeof value.attributes === "object")) return false;
+      if (!(value.definitions && typeof value.definitions === "object")) return false;
 
       return true;
     }

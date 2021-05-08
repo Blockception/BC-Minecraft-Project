@@ -10,11 +10,11 @@ suite("MCDefinition", () => {
   test("parse1", () => {
     let parse = MCDefinition.parse(Text1);
 
-    assert(parse.Tags.Defined.includes("allowed"));
-    assert(parse.Tags.Excluded.includes("denied"));
+    assert(parse.tag.Defined.includes("allowed"));
+    assert(parse.tag.Excluded.includes("denied"));
 
-    assert.strictEqual(parse.Tags.Defined.length, 1);
-    assert.strictEqual(parse.Tags.Excluded.length, 1);
+    assert.strictEqual(parse.tag.Defined.length, 1);
+    assert.strictEqual(parse.tag.Excluded.length, 1);
   });
 
   test("loadSync file1", () => {
@@ -23,30 +23,30 @@ suite("MCDefinition", () => {
     let Defintions = MCDefinition.loadSync(filepath);
 
     //Tags
-    assert(Defintions.Tags.Defined.includes("tag_number1"));
-    assert(Defintions.Tags.Excluded.includes("FoLolOl"));
-    assert.strictEqual(Defintions.Tags.Defined.length, 1);
-    assert.strictEqual(Defintions.Tags.Excluded.length, 1);
+    assert(Defintions.tag.Defined.includes("tag_number1"));
+    assert(Defintions.tag.Excluded.includes("FoLolOl"));
+    assert.strictEqual(Defintions.tag.Defined.length, 1);
+    assert.strictEqual(Defintions.tag.Excluded.length, 1);
 
     //Families
-    assert(Defintions.Families.Defined.includes("npc"));
-    assert(Defintions.Families.Defined.includes("Npc"));
-    assert(Defintions.Families.Excluded.includes("nemesis"));
-    assert(Defintions.Families.Defined.includes("enemy"));
-    assert.strictEqual(Defintions.Families.Defined.length, 3);
-    assert.strictEqual(Defintions.Families.Excluded.length, 1);
+    assert(Defintions.family.Defined.includes("npc"));
+    assert(Defintions.family.Defined.includes("Npc"));
+    assert(Defintions.family.Excluded.includes("nemesis"));
+    assert(Defintions.family.Defined.includes("enemy"));
+    assert.strictEqual(Defintions.family.Defined.length, 3);
+    assert.strictEqual(Defintions.family.Excluded.length, 1);
 
     //Objectives
-    assert(Defintions.Objectives.Defined.includes("counter"));
-    assert(Defintions.Objectives.Excluded.includes("Foo"));
-    assert.strictEqual(Defintions.Objectives.Defined.length, 1);
-    assert.strictEqual(Defintions.Objectives.Excluded.length, 1);
+    assert(Defintions.objective.Defined.includes("counter"));
+    assert(Defintions.objective.Excluded.includes("Foo"));
+    assert.strictEqual(Defintions.objective.Defined.length, 1);
+    assert.strictEqual(Defintions.objective.Excluded.length, 1);
 
     //Names
-    assert(Defintions.Names.Defined.includes("Steve"));
-    assert(Defintions.Names.Excluded.includes("Creeper"));
-    assert.strictEqual(Defintions.Names.Defined.length, 1);
-    assert.strictEqual(Defintions.Names.Excluded.length, 1);
+    assert(Defintions.name.Defined.includes("Steve"));
+    assert(Defintions.name.Excluded.includes("Creeper"));
+    assert.strictEqual(Defintions.name.Defined.length, 1);
+    assert.strictEqual(Defintions.name.Excluded.length, 1);
   });
 
   test("load file2", (done) => {
@@ -54,30 +54,30 @@ suite("MCDefinition", () => {
 
     MCDefinition.load(filepath).then((Defintions) => {
       //Tags
-      assert(Defintions.Tags.Defined.includes("tag_number1"));
-      assert(Defintions.Tags.Excluded.includes("FoLolOl"));
-      assert.strictEqual(Defintions.Tags.Defined.length, 1);
-      assert.strictEqual(Defintions.Tags.Excluded.length, 1);
+      assert(Defintions.tag.Defined.includes("tag_number1"));
+      assert(Defintions.tag.Excluded.includes("FoLolOl"));
+      assert.strictEqual(Defintions.tag.Defined.length, 1);
+      assert.strictEqual(Defintions.tag.Excluded.length, 1);
 
       //Families
-      assert(Defintions.Families.Defined.includes("npc"));
-      assert(Defintions.Families.Defined.includes("Npc"));
-      assert(Defintions.Families.Excluded.includes("nemesis"));
-      assert(Defintions.Families.Defined.includes("enemy"));
-      assert.strictEqual(Defintions.Families.Defined.length, 3);
-      assert.strictEqual(Defintions.Families.Excluded.length, 1);
+      assert(Defintions.family.Defined.includes("npc"));
+      assert(Defintions.family.Defined.includes("Npc"));
+      assert(Defintions.family.Excluded.includes("nemesis"));
+      assert(Defintions.family.Defined.includes("enemy"));
+      assert.strictEqual(Defintions.family.Defined.length, 3);
+      assert.strictEqual(Defintions.family.Excluded.length, 1);
 
       //Objectives
-      assert(Defintions.Objectives.Defined.includes("counter"));
-      assert(Defintions.Objectives.Excluded.includes("Foo"));
-      assert.strictEqual(Defintions.Objectives.Defined.length, 1);
-      assert.strictEqual(Defintions.Objectives.Excluded.length, 1);
+      assert(Defintions.objective.Defined.includes("counter"));
+      assert(Defintions.objective.Excluded.includes("Foo"));
+      assert.strictEqual(Defintions.objective.Defined.length, 1);
+      assert.strictEqual(Defintions.objective.Excluded.length, 1);
 
       //Names
-      assert(Defintions.Names.Defined.includes("Steve"));
-      assert(Defintions.Names.Excluded.includes("Creeper"));
-      assert.strictEqual(Defintions.Names.Defined.length, 1);
-      assert.strictEqual(Defintions.Names.Excluded.length, 1);
+      assert(Defintions.name.Defined.includes("Steve"));
+      assert(Defintions.name.Excluded.includes("Creeper"));
+      assert.strictEqual(Defintions.name.Defined.length, 1);
+      assert.strictEqual(Defintions.name.Excluded.length, 1);
 
       done();
     });
