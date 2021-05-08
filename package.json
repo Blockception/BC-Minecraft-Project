@@ -39,9 +39,7 @@
     "!lib/test"
   ],
   "dependencies": {
-    "fast-glob": "^3.2.5",
-    "vscode-languageserver": "^7.0.0",
-    "vscode-languageserver-textdocument": "^1.0.1"
+    "fast-glob": "^3.2.5"
   },
   "devDependencies": {
     "@types/chai": "^4.2.17",
