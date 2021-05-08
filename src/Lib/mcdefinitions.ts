@@ -74,6 +74,7 @@ export namespace Definition {
 
 /**The interface for MCDefinitions*/
 export interface MCDefinition {
+  /**A collection of items defined and excluded under a given key*/
   [category: string]: Definition;
 }
 
