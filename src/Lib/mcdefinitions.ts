@@ -134,10 +134,13 @@ export namespace MCDefinition {
   export function toString(data: MCDefinition): string {
     let Out = "";
 
-    Out += Definition.toString(data.Tags, "tag");
-    Out += Definition.toString(data.Objectives, "objective");
-    Out += Definition.toString(data.Names, "name");
-    Out += Definition.toString(data.Families, "family");
+    for (var key in data) {
+      let item = data[key];
+
+      if (Definition.is(item)) {
+        Out += Definition.toString(item, key);
+      }
+    }
 
     return Out;
   }
