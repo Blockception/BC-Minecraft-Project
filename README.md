@@ -7,15 +7,27 @@ A Typescript library for dealing with minecraft bedrock project data
 ```ts
 let project = MCProject.loadSync("some folder");
 
+//First way of getting data
 let tags = project.definitions.tag;
-if (tags && tags.defined.includes('family')) {
+if (tags && tags.defined.includes('target')) {
   ...
 }
 
+//Second way of getting data
+let tag = MCDefinition.getOrAdd(project.definitions, "tag");
+if (tag.defined.includes("target")) {
+  ...
+}
+
+//First way of getting project attribute
 if (project.attributes.diagnose === "true") {
   ...
 }
 
+//Second way of gettin project attribute
+if (MCAttributes.getOrAdd(project.attributes, "diagnose", "false") === "true") {
+  ...
+}
 
 ```
 
