@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Blockception/BC-Minecraft-Data.git"
+    "url": "git+https://github.com/Blockception/BC-Minecraft-Project.git"
   },
   "keywords": [
     "minecraft",
@@ -31,9 +31,9 @@
   "author": "Blockception Ltd",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/Blockception/BC-Minecraft-Data/issues"
+    "url": "https://github.com/Blockception/BC-Minecraft-Project/issues"
   },
-  "homepage": "https://github.com/Blockception/BC-Minecraft-Data#readme",
+  "homepage": "https://github.com/Blockception/BC-Minecraft-Project#readme",
   "files": [
     "lib/**/*",
     "!lib/test"
