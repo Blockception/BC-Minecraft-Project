@@ -94,7 +94,11 @@ export namespace MCIgnore {
     let parts = content.split(/(\r\n|\n)/);
     let Out: MCIgnore = { patterns: [] };
 
-    Out.patterns.push(...parts);
+    for (var I = 0; I < parts.length; I++) {
+      const item = parts[I].trim();
+
+      if (item !== "") Out.patterns.push(item);
+    }
 
     return Out;
   }
