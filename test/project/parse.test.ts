@@ -32,7 +32,7 @@ suite("MCProject", () => {
     assert.strictEqual(project.definitions.name.excluded.length, 1);
 
     assert.strictEqual(project.attributes.diagnose, "true");
-    assert.strictEqual(project.attributes["world.area_used"], "true");
+    assert.strictEqual(project.attributes["world.area_used"], "0 0 0 1000 256 1000");
 
     //Ignores
     assert.strictEqual(project.ignores.patterns.length, 4);
@@ -60,7 +60,7 @@ suite("MCProject", () => {
       assert.strictEqual(project.definitions.name.excluded.length, 1);
 
       assert.strictEqual(project.attributes.diagnose, "true");
-      assert.strictEqual(project.attributes["world.area_used"], "true");
+      assert.strictEqual(project.attributes["world.area_used"], "0 0 0 1000 256 1000");
 
       //Ignores
       assert.strictEqual(project.ignores.patterns.length, 4);
