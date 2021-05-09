@@ -1,5 +1,12 @@
 # Blockception Minecraft Project
 
+<p align="center">
+  <a href="https://www.npmjs.com/package/bc-minecraft-project">
+  	<img alt="npm" src="https://img.shields.io/npm/v/bc-minecraft-project">
+		<img alt="npm" src="https://img.shields.io/npm/dt/bc-minecraft-project">
+  </a>
+</p>
+
 A Typescript library for dealing with minecraft bedrock project data
 
 ## Examples
