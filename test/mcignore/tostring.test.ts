@@ -1,4 +1,4 @@
-import assert = require("assert");
+import { expect } from "chai";
 import { MCIgnore } from "../../src/main";
 
 const Text1 = `OutputFolder
@@ -11,9 +11,9 @@ describe("MCIgnore", () => {
     let data = MCIgnore.parse(Text1);
     let content = MCIgnore.toString(data);
 
-    assert(content.includes("OutputFolder"));
-    assert(content.includes("Temp"));
-    assert(content.includes("Template/something"));
-    assert(content.includes("!BP/**/*.json"));
+    expect(content.includes("OutputFolder"));
+    expect(content.includes("Temp"));
+    expect(content.includes("Template/something"));
+    expect(content.includes("!BP/**/*.json"));
   });
 });

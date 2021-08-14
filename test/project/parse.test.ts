@@ -1,7 +1,7 @@
 import { TestFilesFolder } from "../utillity.test";
 import * as path from "path";
-import assert = require("assert");
-import { MCIgnore, MCProject } from "../../src/main";
+import { MCProject } from "../../src/main";
+import { expect } from "chai";
 
 const Text1 = `OutputFolder
 Temp
@@ -16,26 +16,26 @@ describe("MCProject", () => {
 
     //Attributes
     var keys = Object.getOwnPropertyNames(project.attributes);
-    assert.strictEqual(keys.length, 5, "expected 5 attributes");
+    expect(keys.length).to.equal(5, "expected 5 attributes");
 
     //Definitions
-    assert.strictEqual(project.definitions.tag.defined.length, 1);
-    assert.strictEqual(project.definitions.tag.excluded.length, 1);
+    expect(project.definitions.tag.defined.length).to.equal(1);
+    expect(project.definitions.tag.excluded.length).to.equal(1);
 
-    assert.strictEqual(project.definitions.family.defined.length, 3);
-    assert.strictEqual(project.definitions.family.excluded.length, 1);
+    expect(project.definitions.family.defined.length).to.equal(3);
+    expect(project.definitions.family.excluded.length).to.equal(1);
 
-    assert.strictEqual(project.definitions.objective.defined.length, 1);
-    assert.strictEqual(project.definitions.objective.excluded.length, 1);
+    expect(project.definitions.objective.defined.length).to.equal(1);
+    expect(project.definitions.objective.excluded.length).to.equal(1);
 
-    assert.strictEqual(project.definitions.name.defined.length, 1);
-    assert.strictEqual(project.definitions.name.excluded.length, 1);
+    expect(project.definitions.name.defined.length).to.equal(1);
+    expect(project.definitions.name.excluded.length).to.equal(1);
 
-    assert.strictEqual(project.attributes.diagnose, "true");
-    assert.strictEqual(project.attributes["world.area_used"], "0 0 0 1000 256 1000");
+    expect(project.attributes.diagnose).to.equal("true");
+    expect(project.attributes["world.area_used"]).to.equal("0 0 0 1000 256 1000");
 
     //Ignores
-    assert.strictEqual(project.ignores.patterns.length, 4);
+    expect(project.ignores.patterns.length).to.equal(4);
   });
 
   it("load file2", (done) => {
@@ -44,26 +44,26 @@ describe("MCProject", () => {
     MCProject.load(folder).then((project) => {
       //Attributes
       var keys = Object.getOwnPropertyNames(project.attributes);
-      assert.strictEqual(keys.length, 5, "expected 5 attributes");
+      expect(keys.length).to.equal(5, "expected 5 attributes");
 
       //Definitions
-      assert.strictEqual(project.definitions.tag.defined.length, 1);
-      assert.strictEqual(project.definitions.tag.excluded.length, 1);
+      expect(project.definitions.tag.defined.length).to.equal(1);
+      expect(project.definitions.tag.excluded.length).to.equal(1);
 
-      assert.strictEqual(project.definitions.family.defined.length, 3);
-      assert.strictEqual(project.definitions.family.excluded.length, 1);
+      expect(project.definitions.family.defined.length).to.equal(3);
+      expect(project.definitions.family.excluded.length).to.equal(1);
 
-      assert.strictEqual(project.definitions.objective.defined.length, 1);
-      assert.strictEqual(project.definitions.objective.excluded.length, 1);
+      expect(project.definitions.objective.defined.length).to.equal(1);
+      expect(project.definitions.objective.excluded.length).to.equal(1);
 
-      assert.strictEqual(project.definitions.name.defined.length, 1);
-      assert.strictEqual(project.definitions.name.excluded.length, 1);
+      expect(project.definitions.name.defined.length).to.equal(1);
+      expect(project.definitions.name.excluded.length).to.equal(1);
 
-      assert.strictEqual(project.attributes.diagnose, "true");
-      assert.strictEqual(project.attributes["world.area_used"], "0 0 0 1000 256 1000");
+      expect(project.attributes.diagnose).to.equal("true");
+      expect(project.attributes["world.area_used"], "0 0 0 1000 256 1000");
 
       //Ignores
-      assert.strictEqual(project.ignores.patterns.length, 4);
+      expect(project.ignores.patterns.length).to.equal(4);
 
       done();
     });
@@ -75,12 +75,12 @@ describe("MCProject", () => {
     let project = MCProject.loadSync(folder);
 
     var keys = Object.getOwnPropertyNames(project.attributes);
-    assert.strictEqual(keys.length, 0);
+    expect(keys.length).to.equal(0);
 
     var keys = Object.getOwnPropertyNames(project.definitions);
-    assert.strictEqual(keys.length, 0);
+    expect(keys.length).to.equal(0);
 
-    assert.strictEqual(project.ignores.patterns.length, 0);
+    expect(project.ignores.patterns.length).to.equal(0);
   });
 
   it("load not existing", (done) => {
@@ -88,12 +88,12 @@ describe("MCProject", () => {
 
     MCProject.load(folder).then((project) => {
       var keys = Object.getOwnPropertyNames(project.attributes);
-      assert.strictEqual(keys.length, 0);
+      expect(keys.length).to.equal(0);
 
       var keys = Object.getOwnPropertyNames(project.definitions);
-      assert.strictEqual(keys.length, 0);
+      expect(keys.length).to.equal(0);
 
-      assert.strictEqual(project.ignores.patterns.length, 0);
+      expect(project.ignores.patterns.length).to.equal(0);
 
       done();
     });

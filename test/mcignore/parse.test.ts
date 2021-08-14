@@ -1,7 +1,7 @@
 import { TestFilesFolder } from "../utillity.test";
 import * as path from "path";
-import assert = require("assert");
 import { MCIgnore } from "../../src/main";
+import { expect } from "chai";
 
 const Text1 = `OutputFolder
 Temp
@@ -12,11 +12,11 @@ describe("MCIgnore", () => {
   it("parse1", () => {
     let Ignores = MCIgnore.parse(Text1);
 
-    assert.strictEqual(Ignores.patterns.length, 4);
-    assert(Ignores.patterns.includes("OutputFolder"));
-    assert(Ignores.patterns.includes("Temp"));
-    assert(Ignores.patterns.includes("Template/something"));
-    assert(Ignores.patterns.includes("!BP/**/*.json"));
+    expect(Ignores.patterns.length).to.equal(4);
+    expect(Ignores.patterns.includes("OutputFolder"));
+    expect(Ignores.patterns.includes("Temp"));
+    expect(Ignores.patterns.includes("Template/something"));
+    expect(Ignores.patterns.includes("!BP/**/*.json"));
   });
 
   it("loadSync file1", () => {
@@ -24,22 +24,22 @@ describe("MCIgnore", () => {
 
     let Ignores = MCIgnore.loadSync(filepath);
 
-    assert.strictEqual(Ignores.patterns.length, 4);
-    assert(Ignores.patterns.includes("OutputFolder"));
-    assert(Ignores.patterns.includes("Temp"));
-    assert(Ignores.patterns.includes("Template/something"));
-    assert(Ignores.patterns.includes("!BP/**/*.json"));
+    expect(Ignores.patterns.length).to.equal(4);
+    expect(Ignores.patterns.includes("OutputFolder"));
+    expect(Ignores.patterns.includes("Temp"));
+    expect(Ignores.patterns.includes("Template/something"));
+    expect(Ignores.patterns.includes("!BP/**/*.json"));
   });
 
   it("load file2", (done) => {
     const filepath = path.join(TestFilesFolder, "mcignore", "file2.mcignore");
 
     MCIgnore.load(filepath).then((Ignores) => {
-      assert.strictEqual(Ignores.patterns.length, 4);
-      assert(Ignores.patterns.includes("OutputFolder"));
-      assert(Ignores.patterns.includes("Temp"));
-      assert(Ignores.patterns.includes("Template/something"));
-      assert(Ignores.patterns.includes("!BP/**/*.json"));
+      expect(Ignores.patterns.length).to.equal(4);
+      expect(Ignores.patterns.includes("OutputFolder"));
+      expect(Ignores.patterns.includes("Temp"));
+      expect(Ignores.patterns.includes("Template/something"));
+      expect(Ignores.patterns.includes("!BP/**/*.json"));
 
       done();
     });

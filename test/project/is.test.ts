@@ -1,14 +1,14 @@
-import assert = require("assert");
 import { MCProject } from "../../src/main";
 import { TestFilesFolder } from "../utillity.test";
 import * as path from "path";
+import { expect } from "chai";
 
 describe("MCProject", () => {
   it("is it1", () => {
     let it = MCProject.createEmpty();
 
     if (!MCProject.is(it)) {
-      assert.fail();
+      expect.fail();
     }
   });
 
@@ -18,7 +18,7 @@ describe("MCProject", () => {
     let project = MCProject.loadSync(folder);
 
     if (!MCProject.is(project)) {
-      assert.fail();
+      expect.fail();
     }
   });
 
@@ -27,7 +27,7 @@ describe("MCProject", () => {
 
     MCProject.load(folder).then((project) => {
       if (!MCProject.is(project)) {
-        assert.fail();
+        expect.fail();
       }
 
       done();

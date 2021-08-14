@@ -1,7 +1,7 @@
 import { MCAttributes } from "../../src/main";
 import { TestFilesFolder } from "../utillity.test";
 import * as path from "path";
-import assert = require("assert");
+import { expect } from "chai";
 
 const Text1 = `diagnostics.objectives=true
 diagnostics.tags=false
@@ -22,7 +22,7 @@ describe("MCAttributes", () => {
 
       const value = parse[element.key];
 
-      assert.strictEqual(value, element.value);
+      expect(value).to.equal(element.value);
     }
   });
 
@@ -31,24 +31,24 @@ describe("MCAttributes", () => {
 
     let Attributes = MCAttributes.loadSync(filepath);
 
-    assert.strictEqual(Attributes["diagnose"], "true");
-    assert.strictEqual(Attributes["diagnose.objectives"], "true");
-    assert.strictEqual(Attributes["diagnose.tags"], "false");
-    assert.strictEqual(Attributes["diagnose.mcfunctions"], "true");
+    expect(Attributes["diagnose"]).to.equal("true");
+    expect(Attributes["diagnose.objectives"]).to.equal("true");
+    expect(Attributes["diagnose.tags"]).to.equal("false");
+    expect(Attributes["diagnose.mcfunctions"]).to.equal("true");
 
-    assert.strictEqual(Attributes["world.area_used"], "0 0 0 1000 256 1000");
+    expect(Attributes["world.area_used"]).to.equal("0 0 0 1000 256 1000");
   });
 
   it("load file2", (done) => {
     const filepath = path.join(TestFilesFolder, "mcattributes", "file2.mcattributes");
 
     MCAttributes.load(filepath).then((Attributes) => {
-      assert.strictEqual(Attributes["diagnose"], "true");
-      assert.strictEqual(Attributes["diagnose.objectives"], "true");
-      assert.strictEqual(Attributes["diagnose.tags"], "false");
-      assert.strictEqual(Attributes["diagnose.mcfunctions"], "true");
+      expect(Attributes["diagnose"]).to.equal("true");
+      expect(Attributes["diagnose.objectives"]).to.equal("true");
+      expect(Attributes["diagnose.tags"]).to.equal("false");
+      expect(Attributes["diagnose.mcfunctions"]).to.equal("true");
 
-      assert.strictEqual(Attributes["world.area_used"], "0 0 0 1000 256 1000");
+      expect(Attributes["world.area_used"]).to.equal("0 0 0 1000 256 1000");
 
       done();
     });

@@ -1,4 +1,4 @@
-import assert = require("assert");
+import { expect } from "chai";
 import { MCAttributes } from "../../src/main";
 
 const Text1 = `diagnostics.objectives=true
@@ -10,8 +10,8 @@ describe("MCAttributes", () => {
     let data = MCAttributes.parse(Text1);
     let content = MCAttributes.toString(data);
 
-    assert(content.includes("diagnostics.objectives=true"));
-    assert(content.includes("diagnostics.tags=false"));
-    assert(content.includes("diagnostics.json=true"));
+    expect(content.includes("diagnostics.objectives=true"));
+    expect(content.includes("diagnostics.tags=false"));
+    expect(content.includes("diagnostics.json=true"));
   });
 });
