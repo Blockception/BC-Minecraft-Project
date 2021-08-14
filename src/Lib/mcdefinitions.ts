@@ -87,13 +87,13 @@ export namespace MCDefinition {
 
     parts.forEach((property) => {
       //Remove comment
-      let cindex = property.indexOf("#");
+      const cindex = property.indexOf("#");
 
       if (cindex >= 0) {
         property = property.substring(0, cindex);
       }
 
-      let index = property.indexOf("=");
+      const index = property.indexOf("=");
 
       if (index >= 0) {
         const name = property.substring(0, index).toLowerCase();
