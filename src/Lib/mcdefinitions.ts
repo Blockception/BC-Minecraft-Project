@@ -13,8 +13,7 @@ export interface Definition {
 export namespace Definition {
   /**Add the given value to the definition container, checks if value start with '!' to determine if its exclude or not
    * @param container The container to add to
-   * @param value The value to add, if its start with '!' its added to the exclude list
-   */
+   * @param value The value to add, if its start with '!' its added to the exclude list*/
   export function add(container: Definition, value: string): void {
     if (value.startsWith("!")) {
       container.excluded.push(value.substring(1, value.length));
@@ -26,8 +25,7 @@ export namespace Definition {
   /**Converts the given container into a text rep for files
    * @param container The container to convert
    * @param key The key each item will be receiving
-   * @returns A text rep of the object for files
-   */
+   * @returns A text rep of the object for files*/
   export function toString(container: Definition, key: string): string {
     let Out = "";
 
@@ -46,8 +44,7 @@ export namespace Definition {
   }
 
   /**Creates an empty version of the interface Definition
-   * @returns A empty version of Definition
-   */
+   * @returns A empty version of Definition*/
   export function createEmpty(): Definition {
     return {
       excluded: [],
@@ -57,8 +54,7 @@ export namespace Definition {
 
   /** Checks if the given object implements the Defintion interface
    * @param value The object to inspect
-   * @returns Wheter or not the object implements Definition
-   */
+   * @returns Wheter or not the object implements Definition*/
   export function is(value: any): value is Definition {
     if (value) {
       if (value.defined && Array.isArray(value.defined)) {
@@ -84,8 +80,7 @@ export namespace MCDefinition {
   export const filename = ".mcdefinitions";
 
   /**Converts the given contents as if its file contents and returns a MCDefinition object
-   * @param content The contents of the given files
-   */
+   * @param content The contents of the given files*/
   export function parse(content: string): MCDefinition {
     let parts = content.split(/(\r\n|\n)/);
     let Out = MCDefinition.createEmpty();
@@ -115,8 +110,7 @@ export namespace MCDefinition {
   /**
    *
    * @param data
-   * @param category
-   */
+   * @param category*/
   export function getOrAdd(data: MCDefinition, category: string): Definition {
     let item = data[category];
 
@@ -130,8 +124,7 @@ export namespace MCDefinition {
 
   /**Converts the given MCDefinition object into a file content rep of the object
    * @param data The MCDefinition to convert
-   * @returns A text rep of the object
-   */
+   * @returns A text rep of the object*/
   export function toString(data: MCDefinition): string {
     let Out = "";
 
@@ -147,8 +140,7 @@ export namespace MCDefinition {
   }
 
   /**Creates an empty version of MCDefinition
-   * @returns An empty definition of MCDefinition
-   */
+   * @returns An empty definition of MCDefinition*/
   export function createEmpty(): MCDefinition {
     return {};
   }
@@ -157,8 +149,7 @@ export namespace MCDefinition {
    * @param filepath The path to the MCAttributes
    * @param key The key of the value
    * @param value The value of the porerty
-   * @param exclude Whetever or not the exclude the value
-   */
+   * @param exclude Whetever or not the exclude the value*/
   export function appendSync(filepath: string, key: string, value: string, exclude: boolean = false): void {
     if (exclude) {
       value = "!" + value;
@@ -171,16 +162,14 @@ export namespace MCDefinition {
    * @param filepath The path to the MCAttributes
    * @param property The property key
    * @param value The value of the porerty
-   * @returns A promise for when the file is appended
-   */
+   * @returns A promise for when the file is appended*/
   export async function append(filepath: string, property: string, value: string): Promise<void> {
     return fs.promises.appendFile(filepath, `${property}=${value}\n`);
   }
 
   /** Loads the content of the given file into a MCDefinition
    * @param filepath The path to the file to load
-   * @returns A filled MCDefinition
-   */
+   * @returns A filled MCDefinition*/
   export function loadSync(filepath: string): MCDefinition {
     if (fs.existsSync(filepath)) {
       let buffer = fs.readFileSync(filepath);
@@ -193,8 +182,7 @@ export namespace MCDefinition {
 
   /** Loads the content of the given file into a MCDefinition
    * @param filepath The path to the file to load
-   * @returns A filled promise that returns a MCDefinition
-   */
+   * @returns A filled promise that returns a MCDefinition*/
   export async function load(filepath: string): Promise<MCDefinition> {
     let P = fs.promises.readFile(filepath);
 
@@ -203,8 +191,7 @@ export namespace MCDefinition {
 
   /** Saves the given MCDefinition into the specified file
    * @param data The data to save
-   * @param filepath The filepath to save to
-   */
+   * @param filepath The filepath to save to*/
   export function saveSync(data: MCDefinition, filepath: string): void {
     const content = toString(data);
 
@@ -214,8 +201,7 @@ export namespace MCDefinition {
   /** Saves the given MCDefinition into the specified file
    * @param data The data to save
    * @param filepath The filepath to save to
-   * @returns A promise for when the file will be saved
-   */
+   * @returns A promise for when the file will be saved*/
   export async function save(data: MCDefinition, filepath: string): Promise<void> {
     const content = toString(data);
 

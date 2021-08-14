@@ -12,8 +12,7 @@ export namespace MCIgnore {
   export const filename = ".mcignore";
 
   /**Creates an empty version of MCIgnore
-   * @returns An empty MCIgnore object
-   */
+   * @returns An empty MCIgnore object*/
   export function createEmpty(): MCIgnore {
     return { patterns: [] };
   }
@@ -21,8 +20,7 @@ export namespace MCIgnore {
   /** Merges the two given objects into a new MCIgnore.
    * @param A The first data set
    * @param B The second data set
-   * @returns A new object with the combined patterns
-   */
+   * @returns A new object with the combined patterns*/
   export function merge(A: MCIgnore | undefined, B: MCIgnore | undefined): MCIgnore {
     let Out = MCIgnore.createEmpty();
 
@@ -33,8 +31,7 @@ export namespace MCIgnore {
   }
 
   /** Checks wheter or not the given object implements MCIgnore
-   * @param value The object to test
-   */
+   * @param value The object to test*/
   export function is(value: any): value is MCIgnore {
     if (value) {
       if (value.patterns && Array.isArray(value.patterns)) return true;
@@ -45,8 +42,7 @@ export namespace MCIgnore {
 
   /**Parses the given content as if its file content, whereby each line is an pattern
    * @param content The content that one would get as in a file
-   * @returns A parsed version based on the contents, or an empty object
-   */
+   * @returns A parsed version based on the contents, or an empty object*/
   export function parse(content: string): MCIgnore {
     let parts = content.split(/(\r\n|\n)/);
     let Out: MCIgnore = { patterns: [] };
@@ -62,8 +58,7 @@ export namespace MCIgnore {
 
   /**Converts the given MCIgnore to file content
    * @param data The MCIgnore data to convert
-   * @returns A string represerntation of the contents of a MCIgnore
-   */
+   * @returns A string represerntation of the contents of a MCIgnore*/
   export function toString(data: MCIgnore): string {
     let Out = data.patterns.join("\n");
 
@@ -72,8 +67,7 @@ export namespace MCIgnore {
 
   /** Loads the content of the given file into a MCIgnore
    * @param filepath The path to the file to load
-   * @returns A filled MCIgnore
-   */
+   * @returns A filled MCIgnore*/
   export function loadSync(filepath: string): MCIgnore {
     if (fs.existsSync(filepath)) {
       let buffer = fs.readFileSync(filepath);
@@ -86,8 +80,7 @@ export namespace MCIgnore {
 
   /** Loads the content of the given file into a MCIgnore
    * @param filepath The path to the file to load
-   * @returns A filled promise that returns a MCIgnore
-   */
+   * @returns A filled promise that returns a MCIgnore*/
   export async function load(filepath: string): Promise<MCIgnore> {
     let P = fs.promises.readFile(filepath);
 
@@ -96,8 +89,7 @@ export namespace MCIgnore {
 
   /** Saves the given MCIgnore into the specified file
    * @param data The data to save
-   * @param filepath The filepath to save to
-   */
+   * @param filepath The filepath to save to*/
   export function saveSync(data: MCIgnore, filepath: string): void {
     const content = toString(data);
 
@@ -107,8 +99,7 @@ export namespace MCIgnore {
   /** Saves the given MCIgnore into the specified file
    * @param data The data to save
    * @param filepath The filepath to save to
-   * @returns A promise for when the file will be saved
-   */
+   * @returns A promise for when the file will be saved*/
   export async function save(data: MCIgnore, filepath: string): Promise<void> {
     const content = toString(data);
 

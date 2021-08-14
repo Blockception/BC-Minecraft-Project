@@ -16,8 +16,7 @@ export interface MCProject {
 /**The namespace that provides functionality to MCProjects*/
 export namespace MCProject {
   /**Creates an empty version of the MCProject
-   * @returns
-   */
+   * @returns*/
   export function createEmpty(): MCProject {
     return {
       attributes: MCAttributes.createEmpty(),
@@ -28,8 +27,7 @@ export namespace MCProject {
 
   /**Checks wheter or not the given object implements MCProject
    * @param value The object to inspect
-   * @returns Wheter or not the given object implements MCProject
-   */
+   * @returns Wheter or not the given object implements MCProject*/
   export function is(value: any): value is MCProject {
     if (value) {
       if (!(value.ignores && MCIgnore.is(value.ignores))) return false;
@@ -44,8 +42,7 @@ export namespace MCProject {
 
   /**Loads from the given root folder the nesscary project files
    * @param Source The root folder to retrieve files from
-   * @returns
-   */
+   * @returns*/
   export function loadSync(Source: string): MCProject {
     let Attributes = MCAttributes.loadSync(path.join(Source, MCAttributes.filename));
     let Definitions = MCDefinition.loadSync(path.join(Source, MCDefinition.filename));
@@ -59,8 +56,7 @@ export namespace MCProject {
   }
 
   /**Loads from the given root folder the nesscary project files
-   * @param Source The root folder to retrieve files from
-   */
+   * @param Source The root folder to retrieve files from*/
   export function load(Source: string): Promise<MCProject> {
     return new Promise((resolve, reject) => {
       resolve(loadSync(Source));
@@ -69,8 +65,7 @@ export namespace MCProject {
 
   /**Saves the gives project into the specified folder
    * @param FolderThe folder to the save the data into
-   * @param project The data to save
-   */
+   * @param project The data to save*/
   export function saveSync(Folder: string, project: MCProject): void {
     MCAttributes.saveSync(project.attributes, path.join(Folder, MCAttributes.filename));
     MCIgnore.saveSync(project.ignores, path.join(Folder, MCIgnore.filename));
@@ -80,8 +75,7 @@ export namespace MCProject {
   /**Saves the gives project into the specified folder
    * @param FolderThe folder to the save the data into
    * @param project The data to save
-   * @returns A promise that is done wheter the data has been written
-   */
+   * @returns A promise that is done wheter the data has been written*/
   export async function save(Folder: string, project: MCProject): Promise<void[]> {
     let P: Promise<void>[] = [
       MCAttributes.save(project.attributes, path.join(Folder, MCAttributes.filename)),
