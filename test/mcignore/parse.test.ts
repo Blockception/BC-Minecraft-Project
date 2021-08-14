@@ -8,8 +8,8 @@ Temp
 Template/something
 !BP/**/*.json`;
 
-suite("MCIgnore", () => {
-  test("parse1", () => {
+describe("MCIgnore", () => {
+  it("parse1", () => {
     let Ignores = MCIgnore.parse(Text1);
 
     assert.strictEqual(Ignores.patterns.length, 4);
@@ -19,7 +19,7 @@ suite("MCIgnore", () => {
     assert(Ignores.patterns.includes("!BP/**/*.json"));
   });
 
-  test("loadSync file1", () => {
+  it("loadSync file1", () => {
     const filepath = path.join(TestFilesFolder, "mcignore", "file1.mcignore");
 
     let Ignores = MCIgnore.loadSync(filepath);
@@ -31,7 +31,7 @@ suite("MCIgnore", () => {
     assert(Ignores.patterns.includes("!BP/**/*.json"));
   });
 
-  test("load file2", (done) => {
+  it("load file2", (done) => {
     const filepath = path.join(TestFilesFolder, "mcignore", "file2.mcignore");
 
     MCIgnore.load(filepath).then((Ignores) => {

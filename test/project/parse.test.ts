@@ -8,8 +8,8 @@ Temp
 Template/something
 !BP/**/*.json`;
 
-suite("MCProject", () => {
-  test("loadSync p1", () => {
+describe("MCProject", () => {
+  it("loadSync p1", () => {
     const folder = path.join(TestFilesFolder, "mcproject", "p1");
 
     let project = MCProject.loadSync(folder);
@@ -38,7 +38,7 @@ suite("MCProject", () => {
     assert.strictEqual(project.ignores.patterns.length, 4);
   });
 
-  test("load file2", (done) => {
+  it("load file2", (done) => {
     const folder = path.join(TestFilesFolder, "mcproject", "p1");
 
     MCProject.load(folder).then((project) => {
@@ -69,7 +69,7 @@ suite("MCProject", () => {
     });
   });
 
-  test("loadSync not existing", () => {
+  it("loadSync not existing", () => {
     const folder = path.join(TestFilesFolder, "mcproject", "non_existing");
 
     let project = MCProject.loadSync(folder);
@@ -83,7 +83,7 @@ suite("MCProject", () => {
     assert.strictEqual(project.ignores.patterns.length, 0);
   });
 
-  test("load not existing", (done) => {
+  it("load not existing", (done) => {
     const folder = path.join(TestFilesFolder, "mcproject", "non_existing");
 
     MCProject.load(folder).then((project) => {

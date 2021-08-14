@@ -5,8 +5,8 @@ const Text1 = `diagnostics.objectives=true
 diagnostics.tags=false
 diagnostics.json=true`;
 
-suite("MCAttributes", () => {
-  test("tostring1", () => {
+describe("MCAttributes", () => {
+  it("tostring1", () => {
     let data = MCAttributes.parse(Text1);
     let content = MCAttributes.toString(data);
 

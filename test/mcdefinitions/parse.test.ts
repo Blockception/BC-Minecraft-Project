@@ -6,8 +6,8 @@ import { MCDefinition } from "../../src/main";
 const Text1 = `tag=allowed
 tag=!denied`;
 
-suite("MCDefinition", () => {
-  test("parse1", () => {
+describe("MCDefinition", () => {
+  it("parse1", () => {
     let parse = MCDefinition.parse(Text1);
 
     assert(parse.tag.defined.includes("allowed"));
@@ -17,7 +17,7 @@ suite("MCDefinition", () => {
     assert.strictEqual(parse.tag.excluded.length, 1);
   });
 
-  test("loadSync file1", () => {
+  it("loadSync file1", () => {
     const filepath = path.join(TestFilesFolder, "mcdefinitions", "file1.mcdefinitions");
 
     let Defintions = MCDefinition.loadSync(filepath);
@@ -49,7 +49,7 @@ suite("MCDefinition", () => {
     assert.strictEqual(Defintions.name.excluded.length, 1);
   });
 
-  test("load file2", (done) => {
+  it("load file2", (done) => {
     const filepath = path.join(TestFilesFolder, "mcdefinitions", "file2.mcdefinitions");
 
     MCDefinition.load(filepath).then((Defintions) => {

@@ -6,8 +6,8 @@ tag=!denied
 family=npc
 family=enemy`;
 
-suite("MCDefinitions", () => {
-  test("tostring1", () => {
+describe("MCDefinitions", () => {
+  it("tostring1", () => {
     let data = MCDefinition.parse(Text1);
     let content = MCDefinition.toString(data);
 

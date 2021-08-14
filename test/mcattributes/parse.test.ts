@@ -13,8 +13,8 @@ const Attribute1 = [
   { key: "diagnostics.json", value: "true" },
 ];
 
-suite("MCAttributes", () => {
-  test("parse1", () => {
+describe("MCAttributes", () => {
+  it("parse1", () => {
     let parse = MCAttributes.parse(Text1);
 
     for (var I = 0; I < Attribute1.length; I++) {
@@ -26,7 +26,7 @@ suite("MCAttributes", () => {
     }
   });
 
-  test("loadSync file1", () => {
+  it("loadSync file1", () => {
     const filepath = path.join(TestFilesFolder, "mcattributes", "file1.mcattributes");
 
     let Attributes = MCAttributes.loadSync(filepath);
@@ -39,7 +39,7 @@ suite("MCAttributes", () => {
     assert.strictEqual(Attributes["world.area_used"], "0 0 0 1000 256 1000");
   });
 
-  test("load file2", (done) => {
+  it("load file2", (done) => {
     const filepath = path.join(TestFilesFolder, "mcattributes", "file2.mcattributes");
 
     MCAttributes.load(filepath).then((Attributes) => {

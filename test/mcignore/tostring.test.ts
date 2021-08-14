@@ -6,8 +6,8 @@ Temp
 Template/something
 !BP/**/*.json`;
 
-suite("MCIgnore", () => {
-  test("tostring1", () => {
+describe("MCIgnore", () => {
+  it("tostring1", () => {
     let data = MCIgnore.parse(Text1);
     let content = MCIgnore.toString(data);
 
