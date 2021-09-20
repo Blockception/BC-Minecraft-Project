@@ -61,7 +61,7 @@ The file with the name: `.mcattributes`. This file stores any of the settings or
 tool/program may also introduce each own set of keys, aslong as they are unique to the tool/program. Other programs/tools simply ignore these keys. But when overwriting the file,
 must keep the old keys from other tools or programs.
 
-A wider specification can be found in [McAttributes](mcattributes.md)
+A wider specification can be found in [McAttributes](https://faq.blockception.dev/mcproject/mcattributes)
 
 **Example**
 
@@ -81,7 +81,7 @@ world.area_used=0 0 0 1000 256 1000
 This file specifies anything that is included in the project, but cannot be found in the project files itself, or not easly. At the same time the user can also blacklist definition
 through this same project.
 
-A wider specification can be found in [McDefinitions](mcdefinitions.md)
+A wider specification can be found in [McDefinitions](https://faq.blockception.dev/mcproject/mcdefinitions)
 
 **Example**
 
@@ -125,7 +125,7 @@ name=!steve
 
 Based upon `.gitignore`. This file specifies through glob-patterns what files, folder to included/excluded from the project.
 
-A wider specification can be found in [McIgnore](mcignore.md)
+A wider specification can be found in [McIgnore](https://faq.blockception.dev/mcproject/mcignore)
 
 **Example**
 
