@@ -44,8 +44,8 @@ if (MCAttributes.getOrAdd(project.attributes, "diagnose", "false") === "true") {
 
 ## Project Attribute
 
-This standard will introduce 3 new file that will help with project definition, attributes, excluded/includes of folders/files and settings that deal with project for minecraft
-bedrock.  
+This standard will introduce 3 new file that will help with project definition, attributes, excluded/includes of folders/files and settings that deal
+with project for minecraft bedrock.  
 The file can be found in the root of the project. The following files will be added:
 
 - [Blockception Minecraft Project](#blockception-minecraft-project)
@@ -54,12 +54,13 @@ The file can be found in the root of the project. The following files will be ad
     - [McAttributes](#mcattributes)
     - [McDefinitions](#mcdefinitions)
     - [McIgnore](#mcignore)
+  - [Contributing](#contributing)
 
 ### McAttributes
 
-The file with the name: `.mcattributes`. This file stores any of the settings or attribtues related to the project. Which uses universal determined keys along each project. Each
-tool/program may also introduce each own set of keys, aslong as they are unique to the tool/program. Other programs/tools simply ignore these keys. But when overwriting the file,
-must keep the old keys from other tools or programs.
+The file with the name: `.mcattributes`. This file stores any of the settings or attribtues related to the project. Which uses universal determined
+keys along each project. Each tool/program may also introduce each own set of keys, aslong as they are unique to the tool/program. Other
+programs/tools simply ignore these keys. But when overwriting the file, must keep the old keys from other tools or programs.
 
 A wider specification can be found in [McAttributes](https://faq.blockception.dev/mcproject/mcattributes)
 
@@ -78,8 +79,8 @@ world.area_used=0 0 0 1000 256 1000
 
 ### McDefinitions
 
-This file specifies anything that is included in the project, but cannot be found in the project files itself, or not easly. At the same time the user can also blacklist definition
-through this same project.
+This file specifies anything that is included in the project, but cannot be found in the project files itself, or not easly. At the same time the user
+can also blacklist definition through this same project.
 
 A wider specification can be found in [McDefinitions](https://faq.blockception.dev/mcproject/mcdefinitions)
 
@@ -139,3 +140,14 @@ Template
 ```
 
 ---
+
+## Contributing
+
+First, read the [contributing guide](./CONTRIBUTING.md). fork the project, clone it and run the following commands:
+
+**Installation**
+
+```cmd
+  npm ci
+  npm update
+```
