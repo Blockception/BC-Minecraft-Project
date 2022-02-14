@@ -55,7 +55,7 @@ export namespace MCAttributes {
     for (const Key in data) {
       const value = data[Key];
 
-      if (value && typeof value === "string") Out += `${Key}=${value}`;
+      if (value && typeof value === "string") Out += `${Key}=${value}\n`;
     }
 
     return Out;
