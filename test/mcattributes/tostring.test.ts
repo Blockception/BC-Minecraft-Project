@@ -6,12 +6,15 @@ diagnostics.tags=false
 diagnostics.json=true`;
 
 describe("MCAttributes", () => {
-  it("tostring1", () => {
+  describe("tostring1", () => {
     let data = MCAttributes.parse(Text1);
     let content = MCAttributes.toString(data);
+    let lines = Text1.split('\n');
 
-    expect(content.includes("diagnostics.objectives=true"));
-    expect(content.includes("diagnostics.tags=false"));
-    expect(content.includes("diagnostics.json=true"));
+    lines.map(item=>item.trim()).forEach(item=>{
+      it(`${item} is present`, ()=>{
+        expect(content.includes(item)).to.be.true;
+      })
+    })
   });
 });

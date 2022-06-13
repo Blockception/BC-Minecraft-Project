@@ -10,10 +10,12 @@ describe("MCIgnore", () => {
   it("tostring1", () => {
     let data = MCIgnore.parse(Text1);
     let content = MCIgnore.toString(data);
+    let lines = Text1.split('\n');
 
-    expect(content.includes("OutputFolder"));
-    expect(content.includes("Temp"));
-    expect(content.includes("Template/something"));
-    expect(content.includes("!BP/**/*.json"));
+    lines.map(item=>item.trim()).forEach(item=>{
+      it(`${item} is present`, ()=>{
+        expect(content.includes(item)).to.be.true;
+      })
+    })
   });
 });

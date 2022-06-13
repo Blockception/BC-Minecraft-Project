@@ -14,15 +14,20 @@ const Attribute1 = [
 ];
 
 describe("MCAttributes", () => {
-  it("parse1", () => {
+  describe("parse1", () => {
     let parse = MCAttributes.parse(Text1);
+
+    it("not undefined", ()=>{
+      expect(parse).to.not.be.undefined;
+    })
 
     for (var I = 0; I < Attribute1.length; I++) {
       const element = Attribute1[I];
-
       const value = parse[element.key];
 
-      expect(value).to.equal(element.value);
+      it(`${value} is equal to ${element.value}`, ()=>{
+        expect(value).to.equal(element.value);
+      })
     }
   });
 

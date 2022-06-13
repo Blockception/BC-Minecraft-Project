@@ -7,13 +7,15 @@ family=npc
 family=enemy`;
 
 describe("MCDefinitions", () => {
-  it("tostring1", () => {
+  describe("tostring1", () => {
     let data = MCDefinition.parse(Text1);
     let content = MCDefinition.toString(data);
+    let lines = Text1.split('\n');
 
-    expect(content.includes("tag=allowed"));
-    expect(content.includes("tag=!denied"));
-    expect(content.includes("family=enemy"));
-    expect(content.includes("family=npc"));
+    lines.map(item=>item.trim()).forEach(item=>{
+      it(`${item} is present`, ()=>{
+        expect(content.includes(item)).to.be.true;
+      })
+    })
   });
 });
