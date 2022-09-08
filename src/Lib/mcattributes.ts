@@ -62,22 +62,17 @@ export namespace MCAttributes {
   }
 
   /** Merges the two given objects into a new mcattributes. Whereby B overrides anything A has specified
-   * @param A The first data set
-   * @param B The second data set, overrides anything A has specified
+   * @param items The first data set
    * @returns A new object with the combined attributes*/
-  export function merge(A: MCAttributes, B: MCAttributes): MCAttributes {
+  export function merge(...items: MCAttributes[]): MCAttributes {
     let Out = createEmpty();
 
-    for (const Key in A) {
-      const value = A[Key];
+    for (const item of items) {
+      for (const Key in item) {
+        const value = item[Key];
 
-      Out[Key] = value;
-    }
-
-    for (const Key in B) {
-      const value = B[Key];
-
-      Out[Key] = value;
+        Out[Key] = value;
+      }
     }
 
     return Out;
