@@ -54,7 +54,7 @@ export namespace Definition {
 
   /** Checks if the given object implements the Defintion interface
    * @param value The object to inspect
-   * @returns Wheter or not the object implements Definition*/
+   * @returns Whether or not the object implements Definition*/
   export function is(value: any): value is Definition {
     if (value) {
       if (value.defined && Array.isArray(value.defined)) {

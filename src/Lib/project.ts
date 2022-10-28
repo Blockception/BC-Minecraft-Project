@@ -27,7 +27,7 @@ export namespace MCProject {
 
   /**Checks wheter or not the given object implements MCProject
    * @param value The object to inspect
-   * @returns Wheter or not the given object implements MCProject*/
+   * @returns Whether or not the given object implements MCProject*/
   export function is(value: any): value is MCProject {
     if (value) {
       if (!(value.ignores && MCIgnore.is(value.ignores))) return false;
