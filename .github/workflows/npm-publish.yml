@@ -1,6 +1,6 @@
 # This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
 # For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
-name: 📦 Npm Package & Publish 
+name: 📦 Npm Package & Publish
 env:
   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -36,14 +36,6 @@ jobs:
       - name: 📋 Run Tests
         run: npm run test
 
-      - name: 📋 Test Reporter
-        if: ${{ always() }}
-        uses: dorny/test-reporter@v1
-        with:
-          name: 📋 Unit Test
-          reporter: jest-junit
-          path: "**/junit.xml"
-
   publish-npm:
     needs: test
     runs-on: ubuntu-latest
@@ -64,4 +56,3 @@ jobs:
 
       - name: 🚚 Npm Publish
         run: npm publish
-
