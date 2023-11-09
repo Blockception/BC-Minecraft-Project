@@ -20,64 +20,64 @@ describe("MCDefinition", () => {
   it("loadSync file1", () => {
     const filepath = path.join(TestFilesFolder, "mcdefinitions", "file1.mcdefinitions");
 
-    let Defintions = MCDefinition.loadSync(filepath);
+    const definitions = MCDefinition.loadSync(filepath);
 
     //Tags
-    expect(Defintions.tag.defined.includes("tag_number1")).to.be.true;
-    expect(Defintions.tag.excluded.includes("FoLolOl")).to.be.true;
-    expect(Defintions.tag.defined.length).to.equal(1);
-    expect(Defintions.tag.excluded.length).to.equal(1);
+    expect(definitions.tag.defined.includes("tag_number1")).to.be.true;
+    expect(definitions.tag.excluded.includes("FoLolOl")).to.be.true;
+    expect(definitions.tag.defined.length).to.equal(1);
+    expect(definitions.tag.excluded.length).to.equal(1);
 
     //Families
-    expect(Defintions.family.defined.includes("npc")).to.be.true;
-    expect(Defintions.family.defined.includes("Npc")).to.be.true;
-    expect(Defintions.family.excluded.includes("nemesis")).to.be.true;
-    expect(Defintions.family.defined.includes("enemy")).to.be.true;
-    expect(Defintions.family.defined.length).to.equal(3);
-    expect(Defintions.family.excluded.length).to.equal(1);
+    expect(definitions.family.defined.includes("npc")).to.be.true;
+    expect(definitions.family.defined.includes("Npc")).to.be.true;
+    expect(definitions.family.excluded.includes("nemesis")).to.be.true;
+    expect(definitions.family.defined.includes("enemy")).to.be.true;
+    expect(definitions.family.defined.length).to.equal(3);
+    expect(definitions.family.excluded.length).to.equal(1);
 
     //Objectives
-    expect(Defintions.objective.defined.includes("counter")).to.be.true;
-    expect(Defintions.objective.excluded.includes("Foo")).to.be.true;
-    expect(Defintions.objective.defined.length).to.equal(1);
-    expect(Defintions.objective.excluded.length).to.equal(1);
+    expect(definitions.objective.defined.includes("counter")).to.be.true;
+    expect(definitions.objective.excluded.includes("Foo")).to.be.true;
+    expect(definitions.objective.defined.length).to.equal(1);
+    expect(definitions.objective.excluded.length).to.equal(1);
 
     //Names
-    expect(Defintions.name.defined.includes("Steve")).to.be.true;
-    expect(Defintions.name.excluded.includes("Creeper")).to.be.true;
-    expect(Defintions.name.defined.length).to.equal(1);
-    expect(Defintions.name.excluded.length).to.equal(1);
+    expect(definitions.name.defined.includes("Steve")).to.be.true;
+    expect(definitions.name.excluded.includes("Creeper")).to.be.true;
+    expect(definitions.name.defined.length).to.equal(1);
+    expect(definitions.name.excluded.length).to.equal(1);
   });
 
   it("load file2", (done) => {
     const filepath = path.join(TestFilesFolder, "mcdefinitions", "file2.mcdefinitions");
 
-    MCDefinition.load(filepath).then((Defintions) => {
+    MCDefinition.load(filepath).then((definitions) => {
       //Tags
-      expect(Defintions.tag.defined.includes("tag_number1"));
-      expect(Defintions.tag.excluded.includes("FoLolOl"));
-      expect(Defintions.tag.defined.length).to.equal(1);
-      expect(Defintions.tag.excluded.length).to.equal(1);
+      expect(definitions.tag.defined.includes("tag_number1"));
+      expect(definitions.tag.excluded.includes("FoLolOl"));
+      expect(definitions.tag.defined.length).to.equal(1);
+      expect(definitions.tag.excluded.length).to.equal(1);
 
       //Families
-      expect(Defintions.family.defined.includes("npc"));
-      expect(Defintions.family.defined.includes("Npc"));
-      expect(Defintions.family.excluded.includes("nemesis"));
-      expect(Defintions.family.defined.includes("enemy"));
-      expect(Defintions.family.defined.length).to.equal(3);
-      expect(Defintions.family.excluded.length).to.equal(1);
+      expect(definitions.family.defined.includes("npc"));
+      expect(definitions.family.defined.includes("Npc"));
+      expect(definitions.family.excluded.includes("nemesis"));
+      expect(definitions.family.defined.includes("enemy"));
+      expect(definitions.family.defined.length).to.equal(3);
+      expect(definitions.family.excluded.length).to.equal(1);
 
       //Objectives
-      expect(Defintions.objective.defined.includes("counter"));
-      expect(Defintions.objective.excluded.includes("Foo"));
-      expect(Defintions.objective.defined.length).to.equal(1);
-      expect(Defintions.objective.excluded.length).to.equal(1);
+      expect(definitions.objective.defined.includes("counter"));
+      expect(definitions.objective.excluded.includes("Foo"));
+      expect(definitions.objective.defined.length).to.equal(1);
+      expect(definitions.objective.excluded.length).to.equal(1);
 
       //Names
-      expect(Defintions.name.defined.includes("Steve"));
-      expect(Defintions.name.excluded.includes("Creeper"));
-      expect(Defintions.name.defined.length).to.equal(1);
-      expect(Defintions.name.excluded.length).to.equal(1);
+      expect(definitions.name.defined.includes("Steve"));
+      expect(definitions.name.excluded.includes("Creeper"));
+      expect(definitions.name.defined.length).to.equal(1);
+      expect(definitions.name.excluded.length).to.equal(1);
 
       done();
     });

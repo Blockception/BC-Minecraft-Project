@@ -1,6 +1,6 @@
 import * as fs from "fs";
 
-/**A single defintion for MCDefinitions*/
+/**A single definition for MCDefinitions*/
 export interface Definition {
   /**The definition that have been defined*/
   defined: string[];
@@ -52,7 +52,7 @@ export namespace Definition {
     };
   }
 
-  /** Checks if the given object implements the Defintion interface
+  /** Checks if the given object implements the definition interface
    * @param value The object to inspect
    * @returns Whether or not the object implements Definition*/
   export function is(value: any): value is Definition {
@@ -76,7 +76,7 @@ export interface MCDefinition {
 
 /**The namespace that provides functions for the MCDefinition interface*/
 export namespace MCDefinition {
-  /**The default filename of MCDefintions*/
+  /**The default filename of MCdefinitions*/
   export const filename = ".mcdefinitions";
 
   /**Converts the given contents as if its file contents and returns a MCDefinition object

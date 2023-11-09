@@ -40,7 +40,7 @@ export namespace MCProject {
     return false;
   }
 
-  /**Loads from the given root folder the nesscary project files
+  /**Loads from the given root folder the necessary project files
    * @param Source The root folder to retrieve files from
    * @returns*/
   export function loadSync(Source: string): MCProject {
@@ -55,7 +55,7 @@ export namespace MCProject {
     };
   }
 
-  /**Loads from the given root folder the nesscary project files
+  /**Loads from the given root folder the necessary project files
    * @param Source The root folder to retrieve files from*/
   export function load(Source: string): Promise<MCProject> {
     return new Promise((resolve, reject) => {
