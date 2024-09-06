@@ -44,23 +44,17 @@ export namespace MCProject {
    * @param Source The root folder to retrieve files from
    * @returns*/
   export function loadSync(Source: string): MCProject {
-    let Attributes = MCAttributes.loadSync(path.join(Source, MCAttributes.filename));
-    let Definitions = MCDefinition.loadSync(path.join(Source, MCDefinition.filename));
-    let Ignores = MCIgnore.loadSync(path.join(Source, MCIgnore.filename));
+    const attributes = MCAttributes.loadSync(path.join(Source, MCAttributes.filename));
+    const definitions = MCDefinition.loadSync(path.join(Source, MCDefinition.filename));
+    const ignores = MCIgnore.loadSync(path.join(Source, MCIgnore.filename));
 
-    return {
-      attributes: Attributes,
-      definitions: Definitions,
-      ignores: Ignores,
-    };
+    return { attributes, definitions, ignores };
   }
 
   /**Loads from the given root folder the necessary project files
    * @param Source The root folder to retrieve files from*/
   export function load(Source: string): Promise<MCProject> {
-    return new Promise((resolve, reject) => {
-      resolve(loadSync(Source));
-    });
+    return new Promise((resolve) => resolve(loadSync(Source)));
   }
 
   /**Saves the gives project into the specified folder
@@ -77,7 +71,7 @@ export namespace MCProject {
    * @param project The data to save
    * @returns A promise that is done wheter the data has been written*/
   export async function save(Folder: string, project: MCProject): Promise<void[]> {
-    let P: Promise<void>[] = [
+    const P: Promise<void>[] = [
       MCAttributes.save(project.attributes, path.join(Folder, MCAttributes.filename)),
       MCIgnore.save(project.ignores, path.join(Folder, MCIgnore.filename)),
       MCDefinition.save(project.definitions, path.join(Folder, MCDefinition.filename)),

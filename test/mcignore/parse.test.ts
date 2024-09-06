@@ -1,7 +1,6 @@
-import { TestFilesFolder } from "../utillity.test";
-import * as path from "path";
+import { TestFilesFolder } from "../utillity";
 import { MCIgnore } from "../../src/main";
-import { expect } from "chai";
+import * as path from "path";
 
 const Text1 = `OutputFolder
 Temp
@@ -10,38 +9,21 @@ Template/something
 
 describe("MCIgnore", () => {
   it("parse1", () => {
-    let Ignores = MCIgnore.parse(Text1);
-
-    expect(Ignores.patterns.length).to.equal(4);
-    expect(Ignores.patterns.includes("OutputFolder"));
-    expect(Ignores.patterns.includes("Temp"));
-    expect(Ignores.patterns.includes("Template/something"));
-    expect(Ignores.patterns.includes("!BP/**/*.json"));
+    const ignores = MCIgnore.parse(Text1);
+    expect(ignores).toMatchSnapshot();
   });
 
   it("loadSync file1", () => {
     const filepath = path.join(TestFilesFolder, "mcignore", "file1.mcignore");
 
-    let Ignores = MCIgnore.loadSync(filepath);
-
-    expect(Ignores.patterns.length).to.equal(4);
-    expect(Ignores.patterns.includes("OutputFolder"));
-    expect(Ignores.patterns.includes("Temp"));
-    expect(Ignores.patterns.includes("Template/something"));
-    expect(Ignores.patterns.includes("!BP/**/*.json"));
+    const ignores = MCIgnore.loadSync(filepath);
+    expect(ignores).toMatchSnapshot();
   });
 
-  it("load file2", (done) => {
+  it("load file2", async () => {
     const filepath = path.join(TestFilesFolder, "mcignore", "file2.mcignore");
 
-    MCIgnore.load(filepath).then((Ignores) => {
-      expect(Ignores.patterns.length).to.equal(4);
-      expect(Ignores.patterns.includes("OutputFolder"));
-      expect(Ignores.patterns.includes("Temp"));
-      expect(Ignores.patterns.includes("Template/something"));
-      expect(Ignores.patterns.includes("!BP/**/*.json"));
-
-      done();
-    });
+    const ignores = await MCIgnore.load(filepath);
+    expect(ignores).toMatchSnapshot();
   });
 });

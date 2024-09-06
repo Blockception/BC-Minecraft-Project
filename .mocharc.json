@@ -1,6 +1,0 @@
-{
-  "ui": "bdd",
-  "color": true,
-  "spec": "./lib",
-  "recursive": true
-}

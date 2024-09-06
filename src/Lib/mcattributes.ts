@@ -21,29 +21,28 @@ export namespace MCAttributes {
    * @param content The content that one would get as in a file
    * @returns A parsed version based on the contents, or an empty object*/
   export function parse(content: string): MCAttributes {
-    let parts = content.split(/(\r\n|\n)/);
-
-    let Out: MCAttributes = {};
+    const parts = content.split(/(\r\n|\n)/);
+    const result: MCAttributes = {};
 
     parts.forEach((property) => {
-      let cindex = property.indexOf("#");
+      const cindex = property.indexOf("#");
 
       if (cindex >= 0) {
         property = property.substring(0, cindex).trim();
       }
 
-      let index = property.indexOf("=");
+      const index = property.indexOf("=");
 
       if (index >= 0) {
-        let name = property.substring(0, index);
-        let value = property.substring(index + 1, property.length);
+        const name = property.substring(0, index);
+        const value = property.substring(index + 1, property.length);
 
         //Write value
-        if (name !== "") Out[name] = value;
+        if (name !== "") result[name] = value;
       }
     });
 
-    return Out;
+    return result;
   }
 
   /**Converts the given MCAttributes to file content
@@ -65,7 +64,7 @@ export namespace MCAttributes {
    * @param items The first data set
    * @returns A new object with the combined attributes*/
   export function merge(...items: MCAttributes[]): MCAttributes {
-    let Out = createEmpty();
+    const Out = createEmpty();
 
     for (const item of items) {
       for (const Key in item) {
@@ -98,7 +97,7 @@ export namespace MCAttributes {
    * @returns A filled MCAttributes*/
   export function loadSync(filepath: string): MCAttributes {
     if (fs.existsSync(filepath)) {
-      let buffer = fs.readFileSync(filepath);
+      const buffer = fs.readFileSync(filepath);
 
       return parse(buffer.toString());
     }
@@ -110,7 +109,7 @@ export namespace MCAttributes {
    * @param filepath The path to the file to load
    * @returns A filled promise that returns a MCAttributes*/
   export async function load(filepath: string): Promise<MCAttributes> {
-    let P = fs.promises.readFile(filepath);
+    const P = fs.promises.readFile(filepath);
 
     return P.then((buffer) => parse(buffer.toString()));
   }

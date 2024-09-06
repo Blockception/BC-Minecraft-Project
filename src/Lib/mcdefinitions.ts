@@ -27,20 +27,20 @@ export namespace Definition {
    * @param key The key each item will be receiving
    * @returns A text rep of the object for files*/
   export function toString(container: Definition, key: string): string {
-    let Out = "";
+    let result = "";
 
-    Out += `## ${key}\n`;
+    result += `## ${key}\n`;
     for (let I = 0; I < container.defined.length; I++) {
-      Out += `${key}=${container.defined[I]}\n`;
+      result += `${key}=${container.defined[I]}\n`;
     }
 
     for (let I = 0; I < container.excluded.length; I++) {
-      Out += `${key}=!${container.excluded[I]}\n`;
+      result += `${key}=!${container.excluded[I]}\n`;
     }
 
-    Out += "\n";
+    result += "\n";
 
-    return Out;
+    return result;
   }
 
   /**Creates an empty version of the interface Definition
@@ -82,8 +82,8 @@ export namespace MCDefinition {
   /**Converts the given contents as if its file contents and returns a MCDefinition object
    * @param content The contents of the given files*/
   export function parse(content: string): MCDefinition {
-    let parts = content.split(/(\r\n|\n)/);
-    let Out = MCDefinition.createEmpty();
+    const parts = content.split(/(\r\n|\n)/);
+    const Out = MCDefinition.createEmpty();
 
     parts.forEach((property) => {
       //Remove comment
@@ -99,7 +99,7 @@ export namespace MCDefinition {
         const name = property.substring(0, index).toLowerCase();
         const value = property.substring(index + 1, property.length);
 
-        let container = getOrAdd(Out, name);
+        const container = getOrAdd(Out, name);
         Definition.add(container, value);
       }
     });
@@ -128,8 +128,8 @@ export namespace MCDefinition {
   export function toString(data: MCDefinition): string {
     let Out = "";
 
-    for (var key in data) {
-      let item = data[key];
+    for (const key in data) {
+      const item = data[key];
 
       if (Definition.is(item)) {
         Out += Definition.toString(item, key);
@@ -172,7 +172,7 @@ export namespace MCDefinition {
    * @returns A filled MCDefinition*/
   export function loadSync(filepath: string): MCDefinition {
     if (fs.existsSync(filepath)) {
-      let buffer = fs.readFileSync(filepath);
+      const buffer = fs.readFileSync(filepath);
 
       return parse(buffer.toString());
     }
@@ -184,7 +184,7 @@ export namespace MCDefinition {
    * @param filepath The path to the file to load
    * @returns A filled promise that returns a MCDefinition*/
   export async function load(filepath: string): Promise<MCDefinition> {
-    let P = fs.promises.readFile(filepath);
+    const P = fs.promises.readFile(filepath);
 
     return P.then((buffer) => parse(buffer.toString()));
   }

@@ -1,36 +1,24 @@
 import { MCProject } from "../../src/main";
-import { TestFilesFolder } from "../utillity.test";
+import { TestFilesFolder } from "../utillity";
 import * as path from "path";
-import { expect } from "chai";
 
 describe("MCProject", () => {
   it("is it1", () => {
-    let it = MCProject.createEmpty();
-
-    if (!MCProject.is(it)) {
-      expect.fail();
-    }
+    const project = MCProject.createEmpty();
+    expect(project).toMatchSnapshot();
   });
 
   it("is p1", () => {
     const folder = path.join(TestFilesFolder, "mcproject", "p1");
 
-    let project = MCProject.loadSync(folder);
-
-    if (!MCProject.is(project)) {
-      expect.fail();
-    }
+    const project = MCProject.loadSync(folder);
+    expect(project).toMatchSnapshot();
   });
 
-  it("is async p1", (done) => {
+  it("is async p1", async () => {
     const folder = path.join(TestFilesFolder, "mcproject", "p1");
 
-    MCProject.load(folder).then((project) => {
-      if (!MCProject.is(project)) {
-        expect.fail();
-      }
-
-      done();
-    });
+    const project = await MCProject.load(folder);
+    expect(project).toMatchSnapshot();
   });
 });
