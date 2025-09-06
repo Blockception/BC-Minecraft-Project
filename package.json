@@ -1,6 +1,6 @@
 {
   "name": "bc-minecraft-project",
-  "version": "1.21.73-6",
+  "version": "1.21.73-7",
   "description": "A library that provides object and handling for minecraft projects",
   "main": "./lib/src/main.js",
   "types": "./lib/src/main.d.ts",
